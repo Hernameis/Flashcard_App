@@ -11,7 +11,26 @@
         <script src="../js/jquery.mobile-1.4.5.js"></script>
         <script src="../js/amgiking_dbHandle.js"></script>
        <script>
+           $(document).ready(function() {
+               openDB();
+               createQuestionTable();
 
+               $('#insert-question').click(function() {
+                   let result = insertQuestion();
+               });
+               $('.to-page-study').click(function() {
+                   getQuestion();
+               });
+               $('.to-page-list').click(function() {
+                   listQuestion();
+               })
+               $('.response-answer').click(function() {
+                   responseAnswer();
+               });
+               $('#shuffle').click(function() {
+                   shuffle();
+               });
+           });
        </script>
     </head>
     <body>
@@ -21,39 +40,38 @@
                     <thead><tr></tr></thead>
                     <tbody>
                         <tr>
-                            <th>암기왕!</th>
+                            <th>암기왕</th>
                         </tr>
-                        <tr>
-                            <th><a data-role="button" href="#page-start">공부 시작</a></th>
-                        </tr>
-                        <tr>
-                            <th><a data-role="button" href="#page-add">추가</a></th>
-                        </tr>
-                        <tr>
-                            <th><a data-role="button" href="#" data-rel="close">끝내기</a></th>
-                        </tr>
+                        <tr><th><a data-role="button" href="#page-study" class="to-page-study">공부 시작</a></th></tr>
+                        <tr><th><a data-role="button" href="#page-add">추가</a></th></tr>
+                        <tr><th><a data-role="button" href="#page-list" class="to-page-list">전체 질문 보기</a></th></tr>
+                        <tr><th><a data-role="button" href="#page-setting">설정</a></th></tr>
+                        <tr><th><a data-role="button" href="#" data-rel="close">끝내기</a></th></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <div data-role="page" id="page-start">
+        <div data-role="page" id="page-study">
             <div data-role="header" data-position="fixed">
                 <a href="#page-main" data-icon="home">Home</a>
-                <h4><a href="#">섞기</a></h4>
+                <h1>암기 중</h1>
+                <a href="#" id="shuffle">섞기</a>
             </div>
             <div data-role="content">
                 <ul data-role="listview">
-                    <li><p>문제</p></li>
-                    <li><p>풀스택이란?</p></li>
+                    <li><p id="study-question"></p><span class="ui-li-count" id="study-count"></span></li>
+                    <br><br><br><br><br><br>
+                    <li><p id="study-answer"></p></li>
                 </ul>
                 <br>
                 <div data-role="controlgroup" data-type="horizontal">
-                    <a data-role="button" href="">안다</a>
-                    <a data-role="button" href="">모른다</a>
+                    <a data-role="button" href="" class="response-answer" id="answer-know">안다</a>
+                    <a data-role="button" href="" class="response-answer" id="answer-don-know">모른다</a>
                 </div>
             </div>  
             <div data-role="footer" data-position="fixed">
+                <a data-type="button">처음부터</a>
                 <a data-type="button">수정하기</a>
                 <a data-type="button">삭제하기</a>
             </div>
@@ -65,17 +83,48 @@
                 <h1>문제 만들기</h1>
             </div>
             <div data-role="content">
-                <form>
-                    <label for="question">질문</label>
-                    <input id="question" type="text" placeholder="질문을 입력해주세요">
-                    <label for="answer">정답</label>
-                    <input id="answer" type="text" placeholder="정답을 입력해주세요">
-                    <button type="submit">생성</button>
-                    <button type="reset">다시 쓰기</button>
+                <form onsubmit="return false">
+                    <label for="input-question">질문</label>
+                    <input id="input-question" type="text" placeholder="질문을 입력해주세요" />
+                    <label for="input-answer">정답</label>
+                    <input id="input-answer" type="text" placeholder="정답을 입력해주세요" />
+                    <div data-role="controlgroup" data-type="horizontal">
+                        <button type="button" id="insert-question">생성</button>
+                        <button type="reset">다시 쓰기</button>
+                    </div>
                 </form>
             </div>
             <div data-role="footer" data-position="fixed">
                 
+            </div>
+        </div>
+
+        <div data-role="page" id="page-list">
+            <div data-role="header" data-position="fixed">
+                <a href="#page-main" data-icon="home">Home</a>
+                <h1>등록된 질문</h1>
+            </div>
+            
+            <div data-role="content" id="list-content">
+                <ul data-role="listview" id="list-ul">
+
+                </ul>
+            </div>
+            <div data-role="footer" data-position="fixed">
+
+            </div>
+
+        </div>
+
+        <div data-role="page" id="page-setting">
+            <div data-role="header" data-position="fixed">
+                <a href="#page-main" data-icon="home">Home</a>
+                <h1>설정</h1>
+            </div>
+            <div data-role="content">
+                <ul data-role="listview">
+                    <li><a data-role="button">데이터 초기화</a></li>
+                </ul>
             </div>
         </div>
     </body>
