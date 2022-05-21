@@ -103,11 +103,11 @@ function listQuestion() {
                 return ;
             }
             document.getElementById('list-ul').innerHTML='';
-            $('#list-ul').append('<h4>' + '총 ' + rs.rows.length + '개 등록됨' + '</h4>');
+            $('#list-content').append('<p>' + '총 ' + rs.rows.length + '개 등록됨' + '</p>');
             for (i=0; i<len; i++) {
                 $('#list-ul').append('<li class="ui-li-static ui-body-inherit ui-first-child"><a class="ui-link ui-btn ui-shadow ui-corner-all" data-role="button">'
-                                        + '<p>' + '문제 ' + rs.rows.item(i).question + '</p>'
-                                        + '<p>' + '정답 ' + rs.rows.item(i).answer +'</p>'
+                                        + '<p>' + 'Q ' + rs.rows.item(i).question + '</p>'
+                                        + '<p>' + 'A ' + rs.rows.item(i).answer +'</p>'
                                     +'</li></a>');
             }
         });
@@ -170,20 +170,6 @@ function reNewQuestion(index) {
 function clearInputQuestion() {
     document.getElementById('input-question').value = '';
     document.getElementById('input-answer').value = '';
-}
-
-function clearQuestionList() {
-
-}
-
-function clearQuestionsStudy() {
-
-}
-
-function clearAll() {
-    clearQuestionsStudy();
-    clearInputQuestion();
-    clearQuestionList();
 }
 
 function deleteAllDatabases() {
