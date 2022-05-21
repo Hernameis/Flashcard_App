@@ -80,6 +80,7 @@ function insertDefaultRowInCategoryTable() {
 
 // execute insert data transaction
 function insertQuestion() {
+    category_id = $("#select-category-2 option:selected").val();
     db.transaction(function(ps) {
         const question = $('#input-question').val();
         const answer = $('#input-answer').val();
@@ -91,7 +92,6 @@ function insertQuestion() {
 
         ps.executeSql(insertSQL, [question, answer, category_id, defaultNum, defaultNum],
             function(ps, rs) {
-                console.log('3_책 등록 no : ' + rs.insertId);
                 alert('질문 "' + question +'"' + ' 이 등록되었습니다');
                 location.replace('#page-main');
             },function() {
@@ -167,19 +167,20 @@ function selectCategoryList() {
             console.log('succeed in category list sql');
             let len = categoryList.length;
             document.getElementById('list-ul').innerHTML='';
-            $('#select-category').empty();
+            $('.select-category').empty();
             for (i=0; i<len; i++) {
                 let option = $("<option value=\""+categoryList.item(i).category_id+"\" >"+categoryList.item(i).category_name+"</option>");
-                $('#select-category').append(option);
+                $('.select-category').append(option);
             }
-            $('#select-category').selectmenu().selectmenu("refresh");
+            $('#select-category-2').selectmenu().selectmenu("refresh");
+            $('#select-category-1').selectmenu().selectmenu("refresh");
         }, function() {
             console.log('failed in ategory list sql');
         });
     },function() {
         console.log('category list transaction failed');
     },function() {
-        console.log('category list transaction succeed')
+        console.log('category list transaction succeed');
     });
 }
 
@@ -271,5 +272,37 @@ function insertNewCategory() {
 }
 
 function selectCurrentCategory() {
-    category_id = $("#select-category option:selected").val();
+    category_id = $("#select-category-1 option:selected").val();
+}
+
+function deleteCategory() {
+    db.transaction(function(ps) {
+        deleteSQL = 'delete from category where category_id=?';
+        ps.executeSql(deleteSQL, [category_id],function() {
+                console.log('deleting category sql succeed');
+            },function() {
+                console.log('failed deleting category sql');
+            }
+        );
+    },function() {
+        console.log('failed deleting category transaction');
+    },function() {
+        console.log('deleting category transaction succeed');
+    });
+}
+
+function deleteDataInCategory() {
+    db.transaction(function(ps) {
+        deleteSQL = 'delete from question where category_id=?';
+        ps.executeSql(deleteSQL, [category_id],function() {
+                console.log('deleting category in data sql succeed');
+            },function() {
+                console.log('failed deleting category in data sql');
+            }
+        );
+    },function() {
+        console.log('failed deleting category in data transaction');
+    },function() {
+        console.log('deleting category in data transaction succeed');
+    });
 }

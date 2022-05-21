@@ -29,6 +29,7 @@
                $('.to-page-add').click(function() {
                    clearInputQuestion();
                    selectCategoryList()
+                   
                });
                $('.to-page-list').click(function() {
                    getQuestionList();
@@ -45,9 +46,16 @@
                });
                $('.show-category').click(function() {
                    selectCategoryList();
+                   
                });
                $('#add-new-category').click(function() {
                    insertNewCategory();
+               });
+               $('#delete-category').click(function() {
+                   selectCurrentCategory();
+                   deleteDataInCategory();
+                   deleteCategory();
+                   selectCategoryList();
                });
            });
        </script>
@@ -71,8 +79,9 @@
                 <a href="#add-category" data-icon="plus">추가</a>
             </div>
             <div data-role="content">
-                <select name="category" id="select-category" data-native-menu="false">
+                <select name="category" id="select-category-1" class="select-category" data-native-menu="false">
                 </select>
+                <a data-role="button" href="#dialog-delete-category">카테고리 삭제하기</a>
                 <a data-role="button" href="#page-study" class="to-page-study">공부 시작</a>
             </div>
         </div>
@@ -110,7 +119,7 @@
             <div data-role="content">
                 <form onsubmit="return false">
                     <label for="select-add-category">카테고리</label>
-                    <select id="select-add-category">
+                    <select id="select-category-2" class="select-category" data-native-menu="false">
                         
                     </select>
                     <label for="input-question">질문</label>
@@ -180,5 +189,18 @@
                 <a data-role="button" href="#page-category">취소</a>
             </div>
         </div>
+
+        <div data-role="dialog" id="dialog-delete-category">
+            <div data-role="header" data-position="fixed">
+
+            </div>
+            <div data-role="content">
+                <p>해당 카테고리를 삭데하시겠습니까?</p>
+                <p>카테고리 안의 모든 데이터가 삭제됩니다</p>
+                <a data-role="button" href="#page-category" id="delete-category">예</a>
+                <a data-role="button" href="#page-category">아니오</a>
+            </div>
+        </div>
+        
     </body>
 </html>
