@@ -17,7 +17,8 @@
                openDB();
                createQuestionTable();
                createCategoryTable();
-               
+               insertDefaultRowInCategoryTable();
+
                $('#insert-question').click(function() {
                    let result = insertQuestion();
                });
@@ -28,7 +29,7 @@
                    clearInputQuestion();
                });
                $('.to-page-list').click(function() {
-                   listQuestion();
+                   getQuestionList();
                })
                $('.response-answer').click(function() {
                    responseAnswer();
@@ -38,6 +39,10 @@
                });
                $('.delete-databases').click(function() {
                    deleteAllDatabases();
+                   createQuestionTable();
+               });
+               $('.show-category').click(function() {
+                    categoryList();
                });
            });
        </script>
@@ -46,7 +51,7 @@
         <div data-role="page" id="page-main">
             <div data-role="content">
                 <p>암기왕</p>
-                <a data-role="button" href="#page-category">공부 시작</a>
+                <a data-role="button" href="#page-category" class="show-category">공부 시작</a>
                 <a data-role="button" href="#page-add" class="to-page-add">추가</a>
                 <a data-role="button" href="#page-list" class="to-page-list">전체 질문 보기</a>
                 <a data-role="button" href="#page-setting">설정</a>
@@ -60,7 +65,7 @@
                 <h1>카테고리 선택</h1>
             </div>
             <div data-role="content">
-                <select id="select-category" data-native-menu="false">
+                <select name="category" id="select-category" data-native-menu="false">
                 </select>
                 <a data-role="button" href="#page-study" class="to-page-study">공부 시작</a>
             </div>
