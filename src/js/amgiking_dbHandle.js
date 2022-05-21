@@ -28,17 +28,14 @@ function createQuestionTable() {
         ps.executeSql(createTableSQL, [],
             function() {
                 console.log('2_1_Succeed in creating question table sql');
-            },
-            function() {
+            },function() {
                 console.log('2_1_Fail to create question table sql');
-            }
-            );
+            });
         },function() {
             console.log('2_2_Fail to creating question table transaction');
         },function(){
             console.log('2_2_Succeed in creating question table transaction');
-        }
-        );
+        });
     }
 
 // execute creating category table transaction
@@ -48,8 +45,7 @@ function createCategoryTable() {
             ps.executeSql(createTableSQL, [],
             function() {
                 console.log('Succeed in creating category table sql');
-            },
-            function() {
+            },function() {
                 console.log('Fail to create category table sql');
             }
         );
@@ -77,11 +73,9 @@ function insertQuestion() {
                 console.log('3_책 등록 no : ' + rs.insertId);
                 alert('질문 "' + question +'"' + ' 이 등록되었습니다');
                 location.replace('#page-main');
-            },
-            function() {
+            },function() {
                 alert('질문 등록에 실패헸습니다');
-            }
-        );
+            });
     });
 }
 
@@ -102,11 +96,9 @@ function getQuestion() {
             questionList = rs.rows;
             reNewQuestion(index);
         });
-    },
-    function() {
+    },function() {
         console.log('4_get question failed');
-    },
-    function() {
+    },function() {
         console.log('4_get question succeed');
     });
 }
@@ -131,11 +123,9 @@ function listQuestion() {
                                     +'</li></a>');
             }
         });
-    },
-    function() {
+    },function() {
         console.log('5_question list transaction failed');
-    },
-    function() {
+    },function() {
         console.log('5_question list transaction succeed')
     }
     );
@@ -198,16 +188,13 @@ function deleteAllDatabases() {
         ps.executeSql(deleteSQL, [],function() {
                 initVariables();
                 console.log('deleting all databases sql succeed');
-            },
-            function() {
+            },function() {
                 console.log('failed deleting all databases sql');
             }
         );
-    },
-    function() {
+    },function() {
         console.log('failed deleting all databases transaction');
-    },
-    function() {
+    },function() {
         console.log('deleting all databases transaction succeed');
     });
 }
