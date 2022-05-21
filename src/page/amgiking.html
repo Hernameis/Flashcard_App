@@ -23,10 +23,12 @@
                    let result = insertQuestion();
                });
                $('.to-page-study').click(function() {
+                   selectCurrentCategory();
                    getQuestion();
                });
                $('.to-page-add').click(function() {
                    clearInputQuestion();
+                   selectCategoryList()
                });
                $('.to-page-list').click(function() {
                    getQuestionList();
@@ -42,7 +44,10 @@
                    createQuestionTable();
                });
                $('.show-category').click(function() {
-                    categoryList();
+                   selectCategoryList();
+               });
+               $('#add-new-category').click(function() {
+                   insertNewCategory();
                });
            });
        </script>
@@ -63,6 +68,7 @@
             <div data-role="header" data-position="fixed">
                 <a href="#page-main" data-icon="home">Home</a>
                 <h1>카테고리 선택</h1>
+                <a href="#add-category" data-icon="plus">추가</a>
             </div>
             <div data-role="content">
                 <select name="category" id="select-category" data-native-menu="false">
@@ -103,6 +109,10 @@
             </div>
             <div data-role="content">
                 <form onsubmit="return false">
+                    <label for="select-add-category">카테고리</label>
+                    <select id="select-add-category">
+                        
+                    </select>
                     <label for="input-question">질문</label>
                     <input id="input-question" type="text" placeholder="질문을 입력해주세요" />
                     <label for="input-answer">정답</label>
@@ -125,8 +135,9 @@
             </div>
             
             <div data-role="content" id="list-content">
+                <p id="question-count"></p>
                 <ul data-role="listview" id="list-ul" data-filter="true" data-filter-placeholder="">
-
+                    
                 </ul>
             </div>
             <div data-role="footer" data-position="fixed">
@@ -155,6 +166,18 @@
                 <p>모든 데이터를 초기화하시겠습니까?</p>
                 <a data-role="button" href="#page-setting" class="delete-databases">예</a>
                 <a data-role="button" href="#page-setting">아니오</a>
+            </div>
+        </div>
+
+        <div data-role="dialog" id="add-category">
+            <div data-role="header" data-position="fixed">
+
+            </div>
+            <div data-role="content">
+                <label for="add-category-name">카테고리 이름</label>
+                <input type="text" id="input-category-name" placeholder="카테고리 이름을 입력하세요">
+                <a data-role="button" href="#page-category" id="add-new-category">추가</a>
+                <a data-role="button" href="#page-category">취소</a>
             </div>
         </div>
     </body>

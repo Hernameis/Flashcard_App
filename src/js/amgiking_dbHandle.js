@@ -9,6 +9,7 @@ let index = 0;
 let indexArr = [];
 let category_id= 1;
 let questionList = null;
+let categoryList = {};
 
 function initVariables() {
     index = 0;
@@ -109,7 +110,7 @@ function getQuestion() {
                 indexArr[i] = i;
             }
             if (cnt == 0) {
-                alert("목록이 없습니다");
+                alert("해당 카테고리에는 질문이 없습니다");
                 location.replace('#page-main');
                 return ;
             }
@@ -135,13 +136,14 @@ function getQuestionList() {
                 return ;
             }
             document.getElementById('list-ul').innerHTML='';
-            $('#list-content').append('<p>' + '총 ' + rs.rows.length + '개 등록됨' + '</p>');
+            $('#question-count').text('총 ' + rs.rows.length + '개 등록됨');
             for (i=0; i<len; i++) {
-                $('#list-ul').append('<li class="ui-li-static ui-body-inherit ui-first-child"><a class="ui-link ui-btn ui-shadow ui-corner-all" data-role="button">'
+                $('#list-ul').append('<li><a data-role="button">'
                                         + '<p>' + 'Q ' + rs.rows.item(i).question + '</p>'
-                                        + '<p>' + 'A ' + rs.rows.item(i).answer +'</p>'
+                                        + '<p>' + 'A ' + rs.rows.item(i).answer + '</p>'
                                     +'</li></a>');
             }
+            $('#list-ul').listview().listview("refresh");
         });
     },function() {
         console.log('5_question list transaction failed');
@@ -150,19 +152,22 @@ function getQuestionList() {
     });
 }
 
-function categoryList() {
+function selectCategoryList() {
     db.transaction(function(ps) {
-        console.log('select category list');
         const selctQuestionSQL = 'select * from category';
         ps.executeSql(selctQuestionSQL, [], function(ps, rs) {
-            const len = rs.rows.length;
+            categoryList = rs.rows;
+            console.log('succeed in category list sql');
+            let len = categoryList.length;
             document.getElementById('list-ul').innerHTML='';
             $('#select-category').empty();
             for (i=0; i<len; i++) {
-                let option = $("<option value=\""+rs.rows.item(i).category_id+"\" >"+rs.rows.item(i).category_name+"</option>");
+                let option = $("<option value=\""+categoryList.item(i).category_id+"\" >"+categoryList.item(i).category_name+"</option>");
                 $('#select-category').append(option);
-                
             }
+            $('#select-category').selectmenu().selectmenu("refresh");
+        }, function() {
+            console.log('failed in ategory list sql');
         });
     },function() {
         console.log('category list transaction failed');
@@ -237,4 +242,27 @@ function deleteAllDatabases() {
     },function() {
         console.log('deleting all databases transaction succeed');
     });
+}
+
+function insertNewCategory() {
+        db.transaction(function(ps) {
+            const insertSQL = 'insert into category(category_name) select "'+ $('#input-category-name').val() +'" where not exists (select * from category where category_name="' + $('#input-category-name').val() +'")';
+            ps.executeSql(insertSQL, [],
+            function() {
+                console.log('Succeed in inserting into category table sql');
+            },function() {
+                console.log('Failed inserting into category table sql');
+            }
+            );
+        },function() {
+            console.log('Failed inserting into category table transaction');
+        },function(){
+            console.log('Succeed in inserting into category table transaction');
+            selectCategoryList();
+    }
+    );
+}
+
+function selectCurrentCategory() {
+    category_id = $("#select-category option:selected").val();
 }
