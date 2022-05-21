@@ -16,7 +16,8 @@
                initVariables();
                openDB();
                createQuestionTable();
-
+               createCategoryTable();
+               
                $('#insert-question').click(function() {
                    let result = insertQuestion();
                });
@@ -59,9 +60,7 @@
                 <h1>카테고리 선택</h1>
             </div>
             <div data-role="content">
-                <select data-narive-menu="false">
-                    <option value="aa">aa</option>
-                    <option value="aa">aa</option>
+                <select id="select-category" data-native-menu="false">
                 </select>
                 <a data-role="button" href="#page-study" class="to-page-study">공부 시작</a>
             </div>

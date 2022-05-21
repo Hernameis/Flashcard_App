@@ -21,22 +21,42 @@ function openDB() {
     console.log('1_Database created');
 }
 
-// execute creating table transaction
+// execute creating question table transaction
 function createQuestionTable() {
     db.transaction(function(ps) {
         const createTableSQL = 'CREATE TABLE IF NOT EXISTS question(question_id integer primary key autoincrement, question text, answer text, category text, right integer default 0, wrong integer default 0)';
         ps.executeSql(createTableSQL, [],
             function() {
-                console.log('2_1_Succeed in creating table sql');
+                console.log('2_1_Succeed in creating question table sql');
             },
             function() {
-                console.log('2_1_Fail to create table sql');
+                console.log('2_1_Fail to create question table sql');
+            }
+            );
+        },function() {
+            console.log('2_2_Fail to creating question table transaction');
+        },function(){
+            console.log('2_2_Succeed in creating question table transaction');
+        }
+        );
+    }
+
+// execute creating category table transaction
+function createCategoryTable() {
+        db.transaction(function(ps) {
+            const createTableSQL = 'CREATE TABLE IF NOT EXISTS category(category_id integer primary key autoincrement, category_name text default "기본")';
+            ps.executeSql(createTableSQL, [],
+            function() {
+                console.log('Succeed in creating category table sql');
+            },
+            function() {
+                console.log('Fail to create category table sql');
             }
         );
     },function() {
-        console.log('2_2_Fail to creating table transaction');
+        console.log('Fail to creating category table transaction');
     },function(){
-        console.log('2_2_Succeed in creating table transaction');
+        console.log('Succeed in creating category table transaction');
     }
     );
 }
