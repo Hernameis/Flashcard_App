@@ -9,6 +9,12 @@ let index = 0;
 let indexArr = [];
 let questionList = null;
 
+function initVariables() {
+    index = 0;
+    indexArr = [];
+    questionList = null;
+}
+
 // create and open database
 function openDB() {
     db = window.openDatabase('amgikingDB', db_version, 'db for memory data', dbSize_mb * 1024 * 1024);
@@ -141,13 +147,7 @@ function isEmptyStr(str) {
     return false;
 }
 
-function reNewQuestion(index) {
-    document.getElementById('study-question').innerHTML = questionList.item(indexArr[index]).question;
-    document.getElementById('study-answer').innerHTML = questionList.item(indexArr[index]).answer;
-    document.getElementById('study-count').innerHTML = (index+1) + '/' + questionList.length;
-}
-
-function shuffle() {
+function shuffleRemainQuestions() {
     let temp = 0;
     let num = 0;
     let start = index;
@@ -157,7 +157,51 @@ function shuffle() {
         indexArr[i] = indexArr[num];
         indexArr[num] = temp;
     }
-    document.getElementById('study-question').innerHTML = questionList.item(indexArr[index]).question;
-    document.getElementById('study-answer').innerHTML = questionList.item(indexArr[index]).answer;
+    reNewQuestion(index);
     console.log(indexArr);
+}
+
+function reNewQuestion(index) {
+    document.getElementById('study-question').innerText = questionList.item(indexArr[index]).question;
+    document.getElementById('study-answer').innerText = questionList.item(indexArr[index]).answer;
+    document.getElementById('study-count').innerText = (index+1) + '/' + questionList.length;
+}
+
+function clearInputQuestion() {
+    document.getElementById('input-question').value = '';
+    document.getElementById('input-answer').value = '';
+}
+
+function clearQuestionList() {
+
+}
+
+function clearQuestionsStudy() {
+
+}
+
+function clearAll() {
+    clearQuestionsStudy();
+    clearInputQuestion();
+    clearQuestionList();
+}
+
+function deleteAllDatabases() {
+    db.transaction(function(ps) {
+        deleteSQL = 'delete from question';
+        ps.executeSql(deleteSQL, [],function() {
+                initVariables();
+                console.log('deleting all databases sql succeed');
+            },
+            function() {
+                console.log('failed deleting all databases sql');
+            }
+        );
+    },
+    function() {
+        console.log('failed deleting all databases transaction');
+    },
+    function() {
+        console.log('deleting all databases transaction succeed');
+    });
 }

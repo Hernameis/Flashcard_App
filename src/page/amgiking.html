@@ -12,6 +12,7 @@
         <script src="../js/amgiking_dbHandle.js"></script>
        <script>
            $(document).ready(function() {
+               initVariables();
                openDB();
                createQuestionTable();
 
@@ -21,6 +22,9 @@
                $('.to-page-study').click(function() {
                    getQuestion();
                });
+               $('.to-page-add').click(function() {
+                   clearInputQuestion();
+               });
                $('.to-page-list').click(function() {
                    listQuestion();
                })
@@ -28,7 +32,10 @@
                    responseAnswer();
                });
                $('#shuffle').click(function() {
-                   shuffle();
+                   shuffleRemainQuestions();
+               });
+               $('.delete-databases').click(function() {
+                   deleteAllDatabases();
                });
            });
        </script>
@@ -42,13 +49,23 @@
                         <tr>
                             <th>암기왕</th>
                         </tr>
-                        <tr><th><a data-role="button" href="#page-study" class="to-page-study">공부 시작</a></th></tr>
-                        <tr><th><a data-role="button" href="#page-add">추가</a></th></tr>
+                        <tr><th><a data-role="button" href="#page-category">공부 시작</a></th></tr>
+                        <tr><th><a data-role="button" href="#page-add" class="to-page-add">추가</a></th></tr>
                         <tr><th><a data-role="button" href="#page-list" class="to-page-list">전체 질문 보기</a></th></tr>
                         <tr><th><a data-role="button" href="#page-setting">설정</a></th></tr>
                         <tr><th><a data-role="button" href="#" data-rel="close">끝내기</a></th></tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <div data-role="page" id="page-category">
+            <div data-role="header" data-position="fixed">
+                <a href="#page-main" data-icon="home">Home</a>
+                <h1>카테고리 선택</h1>
+            </div>
+            <div data-role="content">
+                <a data-role="button" href="#page-study" class="to-page-study">공부 시작</a>
             </div>
         </div>
 
@@ -123,8 +140,19 @@
             </div>
             <div data-role="content">
                 <ul data-role="listview">
-                    <li><a data-role="button">데이터 초기화</a></li>
+                    <li><a href="#delete-databases-check" data-role="button">데이터 초기화</a></li>
                 </ul>
+            </div>
+        </div>
+
+        <div data-role="dialog" id="delete-databases-check">
+            <div data-role="header" data-position="fixed">
+
+            </div>
+            <div data-role="content">
+                <p>모든 데이터를 초기화하시겠습니까?</p>
+                <a data-role="button" href="#page-setting" class="delete-databases">예</a>
+                <a data-role="button" href="#page-setting">아니오</a>
             </div>
         </div>
     </body>
