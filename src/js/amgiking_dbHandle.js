@@ -126,6 +126,9 @@ function getQuestion() {
 
 // execute select question list transaction
 function getQuestionList() {
+
+    selectCategoryList(); // need to fix this line
+
     db.transaction(function(ps) {
         console.log('select question list');
         const selctQuestionSQL = 'select * from question where category_id=?';
@@ -137,10 +140,14 @@ function getQuestionList() {
             }
             document.getElementById('list-ul').innerHTML='';
             $('#question-count').text('총 ' + rs.rows.length + '개 등록됨');
+
+            // need to fix this code
+
             for (i=0; i<len; i++) {
                 $('#list-ul').append('<li><a data-role="button">'
                                         + '<p>' + 'Q ' + rs.rows.item(i).question + '</p>'
                                         + '<p>' + 'A ' + rs.rows.item(i).answer + '</p>'
+                                        + '<div class="ui-li-count">' + categoryList[category_id-1]["category_name"] + '</div>'
                                     +'</li></a>');
             }
             $('#list-ul').listview().listview("refresh");
