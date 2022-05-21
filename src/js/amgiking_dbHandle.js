@@ -7,7 +7,7 @@ const defaultVal = null;
 
 let index = 0;
 let indexArr = [];
-let category_id= 1;
+let categoryIdx= 1;
 let questionList = null;
 let categoryList = {};
 
@@ -80,7 +80,7 @@ function insertDefaultRowInCategoryTable() {
 
 // execute insert data transaction
 function insertQuestion() {
-    category_id = $("#select-category-2 option:selected").val();
+    categoryIdx = $("#select-category-2 option:selected").val();
     db.transaction(function(ps) {
         const question = $('#input-question').val();
         const answer = $('#input-answer').val();
@@ -90,7 +90,7 @@ function insertQuestion() {
 
         let insertSQL = 'insert into question(question, answer, category_id, right, wrong) values(?,?,?,?,?)';
 
-        ps.executeSql(insertSQL, [question, answer, category_id, defaultNum, defaultNum],
+        ps.executeSql(insertSQL, [question, answer, categoryList[categoryIdx].category_id, defaultNum, defaultNum],
             function(ps, rs) {
                 alert('질문 "' + question +'"' + ' 이 등록되었습니다');
                 location.replace('#page-main');
@@ -102,9 +102,10 @@ function insertQuestion() {
 
 // execute get qestion tranaction
 function getQuestion() {
+    $('#h1-study').text(categoryList[categoryIdx].category_name);
     db.transaction(function(ps) {
         const selectCntQuestion = 'select * from question where category_id=?';
-        ps.executeSql(selectCntQuestion, [category_id], function(ps, rs) {
+        ps.executeSql(selectCntQuestion, [categoryList[categoryIdx].category_id], function(ps, rs) {
             let cnt = rs.rows.length;
             for(i=0; i<cnt; i++) {
                 indexArr[i] = i;
@@ -131,8 +132,8 @@ function getQuestionList() {
 
     db.transaction(function(ps) {
         console.log('select question list');
-        const selctQuestionSQL = 'select * from question where category_id=?';
-        ps.executeSql(selctQuestionSQL, [category_id], function(ps, rs) {
+        const selctQuestionSQL = 'select * from question';
+        ps.executeSql(selctQuestionSQL, [], function(ps, rs) {
             const len = rs.rows.length;
             if (len == 0) {
                 document.getElementById('list-ul').innerHTML='<li>저장된 질문이 없습니다</li>';
@@ -144,10 +145,16 @@ function getQuestionList() {
             // need to fix this code
 
             for (i=0; i<len; i++) {
+                let j=0;
+                for(j=0; j<rs.rows.length; j++) {
+                    if (categoryList[j]["category_id"]==rs.rows.item(i).category_id) {
+                        break;
+                    }
+                }
                 $('#list-ul').append('<li><a data-role="button">'
                                         + '<p>' + 'Q ' + rs.rows.item(i).question + '</p>'
                                         + '<p>' + 'A ' + rs.rows.item(i).answer + '</p>'
-                                        + '<div class="ui-li-count">' + categoryList[category_id-1]["category_name"] + '</div>'
+                                        + '<div class="ui-li-count">' + categoryList[j]["category_name"] + '</div>'
                                     +'</li></a>');
             }
             $('#list-ul').listview().listview("refresh");
@@ -169,7 +176,7 @@ function selectCategoryList() {
             document.getElementById('list-ul').innerHTML='';
             $('.select-category').empty();
             for (i=0; i<len; i++) {
-                let option = $("<option value=\""+categoryList.item(i).category_id+"\" >"+categoryList.item(i).category_name+"</option>");
+                let option = $("<option value=\""+ i +"\" >"+categoryList.item(i).category_name+"</option>");
                 $('.select-category').append(option);
             }
             $('#select-category-2').selectmenu().selectmenu("refresh");
@@ -227,6 +234,7 @@ function shuffleRemainQuestions() {
 function reNewQuestion(index) {
     document.getElementById('study-question').innerText = questionList.item(indexArr[index]).question;
     document.getElementById('study-count').innerText = (index+1) + '/' + questionList.length;
+    document.getElementById('answer-ratio').innerText = "정답률 " + answerRatio() + "%";
 }
 
 function clearInputQuestion() {
@@ -271,13 +279,13 @@ function insertNewCategory() {
 }
 
 function selectCurrentCategory() {
-    category_id = $("#select-category-1 option:selected").val();
+    categoryIdx = $("#select-category-1 option:selected").val();
 }
 
 function deleteCategory() {
     db.transaction(function(ps) {
         deleteSQL = 'delete from category where category_id=?';
-        ps.executeSql(deleteSQL, [category_id],function() {
+        ps.executeSql(deleteSQL, [categoryList[categoryIdx].category_id],function() {
                 console.log('deleting category sql succeed');
             },function() {
                 console.log('failed deleting category sql');
@@ -293,7 +301,7 @@ function deleteCategory() {
 function deleteDataInCategory() {
     db.transaction(function(ps) {
         deleteSQL = 'delete from question where category_id=?';
-        ps.executeSql(deleteSQL, [category_id],function() {
+        ps.executeSql(deleteSQL, [categoryList[categoryIdx].category_id],function() {
                 console.log('deleting category in data sql succeed');
             },function() {
                 console.log('failed deleting category in data sql');
@@ -310,4 +318,51 @@ function addAnswerToDialog() {
     $('.answer').empty().listview()
     $('.answer').append('<li><a>' + '정답은 "' + questionList.item(indexArr[index]).answer + '"입니다' + '</li></a>');
     $('.answer').listview('refresh');
+}
+
+function responseWrong() {
+        db.transaction(function(ps) {
+            const insertSQL = 'update question set wrong=wrong+1 where question_id=?';
+            ps.executeSql(insertSQL, [questionList[indexArr[index]].question_id],
+            function() {
+                console.log('Succeed in updating wrong in question table sql');
+            },function() {
+                console.log('Failed updating wrong in question table sql');
+            }
+        );
+    },function() {
+        console.log('Failed updating wrong in question table transaction');
+    },function(){
+        console.log('Succeed in updating wrong in question table transaction');
+    }
+    );
+}
+
+function responseRight() {
+        db.transaction(function(ps) {
+            const insertSQL = 'update question set right=right+1 where question_id=?';
+            ps.executeSql(insertSQL, [questionList[indexArr[index]].question_id],
+            function() {
+                console.log('Succeed in updating wrong in question table sql');
+            },function() {
+                console.log('Failed updating wrong in question table sql');
+            }
+        );
+    },function() {
+        console.log('Failed updating wrong in question table transaction');
+    },function(){
+        console.log('Succeed in updating wrong in question table transaction');
+    }
+    );
+}
+
+function answerRatio() {
+    let right = questionList.item(indexArr[index]).right;
+    let wrong = questionList.item(indexArr[index]).wrong;
+    let sum = right + wrong;
+    
+    if (sum == 0) {
+        return 0;
+    }
+    return right / (right + wrong) * 100;
 }
