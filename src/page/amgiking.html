@@ -35,7 +35,10 @@
                    getQuestionList();
                })
                $('.response-answer').click(function() {
-                   responseAnswer();
+                   addAnswerToDialog();
+               });
+               $('.response-next').click(function() {
+                   nextQuestion();
                });
                $('#shuffle').click(function() {
                    shuffleRemainQuestions();
@@ -95,13 +98,11 @@
             <div data-role="content">
                 <ul data-role="listview">
                     <li><p id="study-question"></p><span class="ui-li-count" id="study-count"></span></li>
-                    <br><br><br><br><br><br>
-                    <li><p id="study-answer"></p></li>
                 </ul>
                 <br>
                 <div data-role="controlgroup" data-type="horizontal">
-                    <a data-role="button" href="" class="response-answer" id="answer-know">안다</a>
-                    <a data-role="button" href="" class="response-answer" id="answer-don-know">모른다</a>
+                    <a data-role="button" href="#dialog-know" class="response-answer">안다</a>
+                    <a data-role="button" href="#dialog-donknow" class="response-answer">모른다</a>
                 </div>
             </div>  
             <div data-role="footer" data-position="fixed">
@@ -199,6 +200,32 @@
                 <p>카테고리 안의 모든 데이터가 삭제됩니다</p>
                 <a data-role="button" href="#page-category" id="delete-category">예</a>
                 <a data-role="button" href="#page-category">아니오</a>
+            </div>
+        </div>
+
+        <div data-role="dialog" id="dialog-know">
+            <div data-role="header" data-position="fixed">
+
+            </div>
+            <div data-role="content">
+                <ul class="answer">
+
+                </ul>
+                <p>정답을 맞췄습니까?</p>
+                <a href="#" data-role="button" class="response-next">맞았다</a>
+                <a href="#" data-role="button" class="response-next">틀렸다</a>
+            </div>
+        </div>
+
+        <div data-role="dialog" id="dialog-donknow">
+            <div data-role="header" data-position="fixed">
+
+            </div>
+            <div data-role="content">
+                <ul class="answer">
+
+                </ul>
+                <a href="#" data-role="button" class="response-next">다음</a>
             </div>
         </div>
         

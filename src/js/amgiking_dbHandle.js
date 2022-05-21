@@ -184,10 +184,11 @@ function selectCategoryList() {
     });
 }
 
-function responseAnswer() {
+function nextQuestion() {
     if (index < questionList.length - 1) {
         index++;
         reNewQuestion(index);
+        location.replace('#page-study');
     } else {
         alert('모든 문제를 풀었습니다');
         index = 0;
@@ -221,12 +222,10 @@ function shuffleRemainQuestions() {
         indexArr[num] = temp;
     }
     reNewQuestion(index);
-    console.log(indexArr);
 }
 
 function reNewQuestion(index) {
     document.getElementById('study-question').innerText = questionList.item(indexArr[index]).question;
-    document.getElementById('study-answer').innerText = questionList.item(indexArr[index]).answer;
     document.getElementById('study-count').innerText = (index+1) + '/' + questionList.length;
 }
 
@@ -305,4 +304,10 @@ function deleteDataInCategory() {
     },function() {
         console.log('deleting category in data transaction succeed');
     });
+}
+
+function addAnswerToDialog() {
+    $('.answer').empty().listview()
+    $('.answer').append('<li><a>' + '정답은 "' + questionList.item(indexArr[index]).answer + '"입니다' + '</li></a>');
+    $('.answer').listview('refresh');
 }
