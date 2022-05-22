@@ -70,10 +70,20 @@
        </script>
     </head>
     <body>
-        <div data-role="page" id="page-main">
+        <div data-role="page" id="page-main" data-theme="b">
+            <div data-role="header" data-position="fixed">
+                <a href="page-main"><img src="../imgs/logo.png" style="background-color:transparent"></a>
+                <h1></h1>
+                <a></a>
+            </div>
             <div data-role="content">
                 <p>암기왕</p>
-                <a data-role="button" href="#page-category" class="show-category">공부 시작</a>
+                <div class="image-box">
+                    <img src="../imgs/illust.png">
+                    <p>생성한 문제 x건이 있어요</p>
+                    <p>직접 만든 문제로 공부를 시작해보세요!</p>
+                    <a data-role="button" href="#page-category" class="show-category">공부 시작</a>
+                </div>
                 <a data-role="button" href="#page-add" class="to-page-add">추가</a>
                 <a data-role="button" href="#page-list" class="to-page-list">전체 질문 보기</a>
                 <a data-role="button" href="#page-setting">설정</a>
@@ -85,7 +95,7 @@
             <div data-role="header" data-position="fixed">
                 <a href="#page-main" data-icon="home">Home</a>
                 <h1>카테고리 선택</h1>
-                <a href="#add-category" data-icon="plus">추가</a>
+                <a href="#add-category" data-icon="plus">문제 만들기</a>
             </div>
             <div data-role="content">
                 <select name="category" id="select-category-1" class="select-category" data-native-menu="false">
