@@ -5,11 +5,16 @@ let dbSize_mb = 20;
 const defaultNum = 0;
 const defaultVal = null;
 
+let questionCnt=0;
 let index = 0;
 let indexArr = [];
 let categoryIdx= 1;
 let questionList = null;
 let categoryList = {};
+
+function init() {
+    printMainPage();
+}
 
 function initVariables() {
     index = 0;
@@ -93,6 +98,7 @@ function insertQuestion() {
         ps.executeSql(insertSQL, [question, answer, categoryList[categoryIdx].category_id, defaultNum, defaultNum],
             function(ps, rs) {
                 alert('질문 "' + question +'"' + ' 이 등록되었습니다');
+                printMainPage();
                 location.replace('#page-main');
             },function() {
                 alert('질문 등록에 실패헸습니다');
@@ -180,7 +186,57 @@ function selectCategoryList() {
                 $('.select-category').append(option);
             }
             $('#select-category-2').selectmenu().selectmenu("refresh");
-            $('#select-category-1').selectmenu().selectmenu("refresh");
+        }, function() {
+            console.log('failed in ategory list sql');
+        });
+    },function() {
+        console.log('category list transaction failed');
+    },function() {
+        console.log('category list transaction succeed');
+    });
+}
+
+function radioCategoryList() {
+    db.transaction(function(ps) {
+        const selctQuestionSQL = 'select * from category';
+        ps.executeSql(selctQuestionSQL, [], function(ps, rs) {
+            categoryList = rs.rows;
+            console.log('succeed in category list sql');
+            let len = categoryList.length;
+            document.getElementById('radio-category').innerHTML='';
+            $('#radio-category').append('<p>카테고리</p>');
+            for (i=0; i<len; i++) {
+                let radio = '<input id="category' + categoryList[i].category_id + '" type="radio" value="' + i + '" name="category">\
+                <label for="category' + categoryList[i].category_id + '">' + categoryList[i].category_name + '</label>';
+                $('#radio-category').append(radio);
+            }
+
+            $('#radio-category').trigger('create');
+        }, function() {
+            console.log('failed in ategory list sql');
+        });
+    },function() {
+        console.log('category list transaction failed');
+    },function() {
+        console.log('category list transaction succeed');
+    });
+}
+
+function editCategoryList() {
+    db.transaction(function(ps) {
+        const selctQuestionSQL = 'select * from category';
+        ps.executeSql(selctQuestionSQL, [], function(ps, rs) {
+            categoryList = rs.rows;
+            console.log('succeed in category list sql');
+            let len = categoryList.length;
+            document.getElementById('category-setting').innerHTML='';
+            $('#category-setting').append('<p>카테고리</p>');
+            for (i=0; i<len; i++) {
+                let category = '<li>' + categoryList[i].category_name + ' 수정 | 삭제' + '</li>';
+                $('#category-setting').append(category);
+            }
+
+            $('#category-setting').listview('refresh');
         }, function() {
             console.log('failed in ategory list sql');
         });
@@ -197,9 +253,8 @@ function nextQuestion() {
         reNewQuestion(index);
         location.replace('#page-study');
     } else {
-        alert('모든 문제를 풀었습니다');
+        location.replace('#page-response-done');
         index = 0;
-        location.replace('#page-main');
     }
 }
 
@@ -280,6 +335,10 @@ function insertNewCategory() {
 
 function selectCurrentCategory() {
     categoryIdx = $("#select-category-1 option:selected").val();
+}
+
+function radioCurrentCategory() {
+    categoryIdx = $('#radio-category input:checked').val();
 }
 
 function deleteCategory() {
@@ -365,4 +424,40 @@ function answerRatio() {
         return 0;
     }
     return right / (right + wrong) * 100;
+}
+
+function printMainPage() {
+    db.transaction(function(ps) {
+        const selectCntQuestion = 'select count(*) from question';
+        ps.executeSql(selectCntQuestion, [], function(ps, rs) {
+            questionCnt = rs.rows[0]['count(*)'];
+        });
+    }, function() {
+    }, function() {
+        putCntToMainPage();
+    });
+}
+
+function putCntToMainPage() {
+    if (questionCnt == 0) {
+        document.getElementById('has-question').innerHTML= '<p>생성한 문제가 없어요!</p>';
+        for (i=0; i<document.getElementsByClassName('no-question-hidden').length; i++) {
+            document.getElementsByClassName('no-question-hidden')[i].style.display='none';
+        }
+        for (i=0; i<document.getElementsByClassName('have-question').length; i++) {
+            document.getElementsByClassName('have-question')[i].style.display='block';
+        }
+    } else {
+        prefix = '<p class="p-inline">생성한 문제가 </p>';
+        suffix = '<p class="p-inline">이 있어요</p>';
+        document.getElementById('has-question').innerHTML= prefix + questionCnt + '건' + suffix;
+        
+        for (i=0; i<document.getElementsByClassName('have-question').length; i++) {
+            document.getElementsByClassName('have-question')[i].style.display='none';
+        }
+        for (i=0; i<document.getElementsByClassName('no-question-hidden').length; i++) {
+            document.getElementsByClassName('no-question-hidden')[i].style.display='block';
+        }
+    }
+    $('#main-question-cnt').trigger('create');
 }

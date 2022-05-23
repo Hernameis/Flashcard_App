@@ -8,13 +8,15 @@
 
         <link rel="shortcut icon" href="#">
         <link rel="stylesheet" href="../css/jquery.mobile-1.4.5.css"/>
+        <link rel="stylesheet" href="../css/amgiking.css">
         <script src="../js/jquery-1.11.1.min.js"></script>
         <script src="../js/jquery.mobile-1.4.5.js"></script>
         <script src="../js/amgiking_dbHandle.js"></script>
        <script>
            $(document).ready(function() {
-               initVariables();
                openDB();
+               init();
+               initVariables();
                createQuestionTable();
                createCategoryTable();
                insertDefaultRowInCategoryTable();
@@ -23,7 +25,7 @@
                    let result = insertQuestion();
                });
                $('.to-page-study').click(function() {
-                   selectCurrentCategory();
+                   radioCurrentCategory();
                    getQuestion();
                });
                $('.to-page-add').click(function() {
@@ -33,6 +35,9 @@
                });
                $('.to-page-list').click(function() {
                    getQuestionList();
+               })
+               $('.to-page-set-category').click(function() {
+                   editCategoryList();
                })
                $('.response-answer').click(function() {
                    addAnswerToDialog();
@@ -48,7 +53,7 @@
                    createQuestionTable();
                });
                $('.show-category').click(function() {
-                   selectCategoryList();
+                   radioCategoryList();
                    
                });
                $('#add-new-category').click(function() {
@@ -66,50 +71,53 @@
                 $('.response-wrong').click(function() {
                     responseWrong();
                });
+                $('.header-home').click(function() {
+                    printMainPage();
+               });
            });
        </script>
     </head>
     <body>
         <div data-role="page" id="page-main" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="page-main"><img src="../imgs/logo.png" style="background-color:transparent"></a>
+                <a href="#page-main" class="header-btn header-home"><img class="header-btn-image" src="../imgs/logo.png"></a>
                 <h1></h1>
-                <a></a>
+                <a href="#page-setting" class="header-btn"><img class="header-btn-image" src="../imgs/icon_settings.png"></a>
             </div>
             <div data-role="content">
-                <p>암기왕</p>
-                <div class="image-box">
-                    <img src="../imgs/illust.png">
-                    <p>생성한 문제 x건이 있어요</p>
+                <div id="id-image-box" class="image-box">
+                    <img src="../imgs/icon_startStudy.png">
+                    <div id="has-question"></div>
                     <p>직접 만든 문제로 공부를 시작해보세요!</p>
-                    <a data-role="button" href="#page-category" class="show-category">공부 시작</a>
+                    <a data-role="button" href="#page-select-category" class="show-category no-question-hidden">공부 시작</a>
+                    <a data-role="button" href="#page-add" class="to-page-add have-question"><img src="../imgs/icon_createQuestion_icon.png">문제 만들기</a>
                 </div>
-                <a data-role="button" href="#page-add" class="to-page-add">추가</a>
-                <a data-role="button" href="#page-list" class="to-page-list">전체 질문 보기</a>
-                <a data-role="button" href="#page-setting">설정</a>
-                <a data-role="button" href="#" data-rel="close">끝내기</a>
+                <div class="no-question-hidden">
+                    <h3>문제를 직접 만들어보세요!</h3>
+                    <a data-role="button" href="#page-add" class="to-page-add"><img src="../imgs/icon_createQuestion_icon.png">문제 만들기</a>
+                    <a data-role="button" href="#page-list" class="to-page-list"><img src="../imgs/icon_seeAllQuestions.png">전체 질문 보기</a>
+                    <a data-role="button" href="#page-set-category" class="to-page-set-category"><img src="../imgs/icon_setCategory.png">카테고리 설정</a>
+                </div>
             </div>
         </div>
 
-        <div data-role="page" id="page-category">
+        <div data-role="page" id="page-select-category" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" data-icon="home">Home</a>
+                <a href="#page-main" class="header-btn header-home"><img class="header-btn-image" src="../imgs/logo.png"></a>
                 <h1>카테고리 선택</h1>
-                <a href="#add-category" data-icon="plus">문제 만들기</a>
             </div>
             <div data-role="content">
-                <select name="category" id="select-category-1" class="select-category" data-native-menu="false">
-                </select>
-                <a data-role="button" href="#dialog-delete-category">카테고리 삭제하기</a>
-                <a data-role="button" href="#page-study" class="to-page-study">공부 시작</a>
+                <div id="radio-category" data-inset="true">
+                </div>
+                <a data-role="button" href="#page-study" class="to-page-study">시작하기</a>
             </div>
         </div>
-
-        <div data-role="page" id="page-study">
+        
+        <div data-role="page" id="page-study" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" data-icon="home">Home</a>
+                <a href="#page-main" class="header-btn header-home"><img class="header-btn-image" src="../imgs/logo.png"></a>
                 <h1 id="h1-study"></h1>
-                <a href="#" id="shuffle">섞기</a>
+                <a href="#" id="shuffle"><img src="../imgs/icon_shuffle.png"></a>
             </div>
             <div data-role="content">
                 <ul data-role="listview">
@@ -132,10 +140,10 @@
                 <a data-type="button">삭제하기</a>
             </div>
         </div>
-
-        <div data-role="page" id="page-add">
+        
+        <div data-role="page" id="page-add" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" data-icon="home">Home</a>
+                <a href="#page-main" class="header-btn header-home"><img class="header-btn-image" src="../imgs/logo.png"></a>
                 <h1>문제 만들기</h1>
             </div>
             <div data-role="content">
@@ -149,7 +157,7 @@
                     <label for="input-answer">정답</label>
                     <input id="input-answer" type="text" placeholder="정답을 입력해주세요" />
                     <div data-role="controlgroup" data-type="horizontal">
-                        <button type="button" id="insert-question">생성</button>
+                        <button type="button" id="insert-question">만들기</button>
                         <button type="reset">다시 쓰기</button>
                     </div>
                 </form>
@@ -158,10 +166,10 @@
                 
             </div>
         </div>
-
-        <div data-role="page" id="page-list">
+        
+        <div data-role="page" id="page-list" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" data-icon="home">Home</a>
+                <a href="#page-main" class="header-btn header-home"><img class="header-btn-image" src="../imgs/logo.png"></a>
                 <h1>등록된 질문</h1>
             </div>
             
@@ -172,14 +180,14 @@
                 </ul>
             </div>
             <div data-role="footer" data-position="fixed">
-
+                
             </div>
-
+            
         </div>
-
-        <div data-role="page" id="page-setting">
+        
+        <div data-role="page" id="page-setting" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" data-icon="home">Home</a>
+                <a href="#page-main" class="header-btn header-home"><img class="header-btn-image" src="../imgs/logo.png"></a>
                 <h1>설정</h1>
             </div>
             <div data-role="content">
@@ -188,67 +196,84 @@
                 </ul>
             </div>
         </div>
-
-        <div data-role="dialog" id="delete-databases-check">
-            <div data-role="header" data-position="fixed">
-
-            </div>
+        
+        <div data-role="dialog" id="delete-databases-check" data-theme="b">
             <div data-role="content">
                 <p>모든 데이터를 초기화하시겠습니까?</p>
                 <a data-role="button" href="#page-setting" class="delete-databases">예</a>
                 <a data-role="button" href="#page-setting">아니오</a>
             </div>
         </div>
-
-        <div data-role="dialog" id="add-category">
-            <div data-role="header" data-position="fixed">
-
-            </div>
+        
+        <div data-role="dialog" id="add-category" data-theme="b">
             <div data-role="content">
                 <label for="add-category-name">카테고리 이름</label>
                 <input type="text" id="input-category-name" placeholder="카테고리 이름을 입력하세요">
-                <a data-role="button" href="#page-category" id="add-new-category">추가</a>
-                <a data-role="button" href="#page-category">취소</a>
+                <a data-role="button" href="#page-set-category" id="add-new-category">추가</a>
+                <a data-role="button" href="#page-select-category">취소</a>
             </div>
         </div>
-
-        <div data-role="dialog" id="dialog-delete-category">
-            <div data-role="header" data-position="fixed">
-
-            </div>
+        
+        <div data-role="dialog" id="dialog-delete-category" data-theme="b">
             <div data-role="content">
                 <p>해당 카테고리를 삭데하시겠습니까?</p>
                 <p>카테고리 안의 모든 데이터가 삭제됩니다</p>
-                <a data-role="button" href="#page-category" id="delete-category">예</a>
-                <a data-role="button" href="#page-category">아니오</a>
+                <a data-role="button" href="#page-select-category" id="delete-category">예</a>
+                <a data-role="button" href="#page-select-category">아니오</a>
             </div>
         </div>
-
-        <div data-role="dialog" id="dialog-know">
-            <div data-role="header" data-position="fixed">
-
-            </div>
+        
+        <div data-role="dialog" id="dialog-know" data-theme="b">
             <div data-role="content">
                 <ul class="answer">
-
+                    
                 </ul>
                 <p>정답을 맞췄습니까?</p>
                 <a href="#" data-role="button" class="response-next response-right">맞았다</a>
                 <a href="#" data-role="button" class="response-next response-wrong">틀렸다</a>
             </div>
         </div>
-
-        <div data-role="dialog" id="dialog-donknow">
-            <div data-role="header" data-position="fixed">
-
-            </div>
+        
+        <div data-role="dialog" id="dialog-donknow" data-theme="b">
             <div data-role="content">
                 <ul class="answer">
-
+                    
                 </ul>
                 <a href="#" data-role="button" class="response-next">다음</a>
             </div>
         </div>
         
+        <div data-role="page" id="page-set-category" data-theme="b">
+            <div data-role="header" data-position="fixed">
+                <a href="#page-main" class="header-btn header-home"><img class="header-btn-image" src="../imgs/logo.png"></a>
+                <h1></h1>
+                <a data-role="button" href="#add-category">만들기</a>
+            </div>
+            <div data-role="content">
+                <ul id="category-setting" data-role="listview" data-filter="true" data-filter-placeholder="카테고리 검색" data-inset="true">
+                </ul>
+                <a data-role="button" href="#dialog-delete-category">카테고리 삭제하기(수정 필요)</a>
+            </div>
+        </div>
+
+        <div data-role="dialog" id="create-question-done" data-theme="b">
+            <div data-role="header" data-position="fixed">
+                <a href="#page-main" class="header-btn header-home"><img class="header-btn-image" src="../imgs/logo.png"></a>
+                <h1></h1>
+            </div>
+            <div data-role="content">
+                문제가 등록되었습니다.
+            </div>
+        </div>
+
+        <div data-role="page" id="page-response-done" data-theme="b">
+            <div data-role="header" data-position="fixed">
+                <a href="#page-main" class="header-btn header-home"><img class="header-btn-image" src="../imgs/logo.png"></a>
+                <h1></h1>
+            </div>
+            <div data-role="content">
+                <p>모든 문제를 풀었습니다</p>
+            </div>
+        </div>
     </body>
-</html>
+    </html>
