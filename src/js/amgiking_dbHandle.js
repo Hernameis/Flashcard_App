@@ -14,6 +14,8 @@ let categoryList = {};
 
 function init() {
     printMainPage();
+    console.log(window.innerHeight +" "+ window.outerHeight);
+    console.log(window.innerWidth +" "+ window.outerWidth);
 }
 
 function initVariables() {
@@ -445,18 +447,18 @@ function putCntToMainPage() {
             document.getElementsByClassName('no-question-hidden')[i].style.display='none';
         }
         for (i=0; i<document.getElementsByClassName('have-question').length; i++) {
-            document.getElementsByClassName('have-question')[i].style.display='block';
+            document.getElementsByClassName('have-question')[i].style.display='inline-block';
         }
     } else {
-        prefix = '<p class="p-inline">생성한 문제가 </p>';
-        suffix = '<p class="p-inline">이 있어요</p>';
+        prefix = '<p class="p-inline">생성한 문제 </p>';
+        suffix = '<p class="p-inline">이 있어요</p><p class="text-small">직접 만든 문제로 공부를 시작해보세요!</p>';
         document.getElementById('has-question').innerHTML= prefix + questionCnt + '건' + suffix;
         
         for (i=0; i<document.getElementsByClassName('have-question').length; i++) {
             document.getElementsByClassName('have-question')[i].style.display='none';
         }
         for (i=0; i<document.getElementsByClassName('no-question-hidden').length; i++) {
-            document.getElementsByClassName('no-question-hidden')[i].style.display='block';
+            document.getElementsByClassName('no-question-hidden')[i].style.display='inline-block';
         }
     }
     $('#main-question-cnt').trigger('create');
