@@ -53,6 +53,11 @@
     margin-top: 20px;
 }
 
+.ui-corner-all > .ui-header:first-child {
+    top: 0;
+    bottom: 0;
+}
+
 .ui-header .ui-btn-left {
     margin-top: 20px;
     margin-left: 16px;
@@ -160,4 +165,68 @@ div#sub-image-box {
     .ui-page-theme-b .ui-btn.main-btn {
         max-width: 150px;
     }
+}
+
+/* add-page */
+form#form-add {
+    height: 100%;
+}
+div#form-add-upper {
+    height:100%;
+}
+div#form-add-bottom {
+    margin-top:-40%;
+}
+button#btn-add-question, button#btn-reset-question {
+    border-radius: 10px;
+    width: 80%;
+    margin: 15px auto;
+}
+
+button#btn-add-question {
+    background-color: #526DDE;
+}
+button#btn-reset-question {
+    background-color: #5B5B5B;
+}
+    /* input box */
+.ui-page-theme-b .ui-body-inherit {
+    background-color: rgba(0,0,0,0);
+    border: none;
+    box-shadow: none;
+}
+.ui-input-text input {
+    border-radius:0;
+}
+.hidden {
+    visibility: hidden;
+}
+.show {
+    visibility: unset;
+    color: #ff6262;
+}
+.input-wrong {
+    border-bottom: solid #ff6262!important;
+}
+.input-right {
+    border-bottom: solid #829aff!important;
+}
+.ui-select .ui-btn, .ui-page-theme-b .ui-btn:hover{
+    border-radius: 0;
+    background: none;
+    border-bottom: solid 0.5px rgba(255,255,255,0.12);
+}
+.ui-select .ui-btn >span {
+    color: rgba(255,255,255,0.5);
+}
+.text-validation img {
+    float: right;
+}
+
+/* select active box */
+.ui-selectmenu .ui-selectmenu-list {
+    background-color:#343434;
+}
+.ui-selectmenu .ui-selectmenu-list >li >a {
+    color: white;
 }

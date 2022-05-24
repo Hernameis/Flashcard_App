@@ -85,23 +85,48 @@ function insertDefaultRowInCategoryTable() {
 
 // execute insert data transaction
 function insertQuestion() {
-    categoryIdx = $("#select-category-2 option:selected").val();
+    categoryIdx = $("#select-category-add option:selected").val();
     db.transaction(function(ps) {
         const question = $('#input-question').val();
         const answer = $('#input-answer').val();
 
-        if (isEmptyStr(question)) { alert('문제를 입력해주세요'); return -1; }
-        if (isEmptyStr(answer)) { alert('정답을 입력해주세요'); return -2; }
+        let bool = true;
+        if (isEmptyStr(question)) {
+            document.getElementById('validation-question').classList.remove("hidden");
+            document.getElementById('validation-question').classList.add("show");
+            document.getElementById('input-question').classList.remove("input-right");
+            document.getElementById('input-question').classList.add("input-wrong");
+            bool = false;
+        } else {
+            document.getElementById('validation-question').classList.remove("show");
+            document.getElementById('validation-question').classList.add("hidden");
+            document.getElementById('input-question').classList.remove("input-wrong");
+            document.getElementById('input-question').classList.add("input-right");
+        }
+        if (isEmptyStr(answer)) {
+            document.getElementById('validation-answer').classList.remove("hidden");
+            document.getElementById('validation-answer').classList.add("show");
+            document.getElementById('input-answer').classList.remove("input-right");
+            document.getElementById('input-answer').classList.add("input-wrong");
+            bool = false;
+        } else {
+            document.getElementById('validation-answer').classList.remove("show");
+            document.getElementById('validation-answer').classList.add("hidden");
+            document.getElementById('input-answer').classList.remove("input-wrong");
+            document.getElementById('input-answer').classList.add("input-right");
+        }
+        if(!bool) {
+            return -1;
+        }
 
         let insertSQL = 'insert into question(question, answer, category_id, right, wrong) values(?,?,?,?,?)';
 
         ps.executeSql(insertSQL, [question, answer, categoryList[categoryIdx].category_id, defaultNum, defaultNum],
             function(ps, rs) {
-                alert('질문 "' + question +'"' + ' 이 등록되었습니다');
+                location.replace('#page-success-create');
                 printMainPage();
-                location.replace('#page-main');
             },function() {
-                alert('질문 등록에 실패헸습니다');
+                console.log("failed creating question");
             });
     });
 }
@@ -117,9 +142,7 @@ function getQuestion() {
                 indexArr[i] = i;
             }
             if (cnt == 0) {
-                alert("해당 카테고리에는 질문이 없습니다");
-                location.replace('#page-main');
-                return ;
+                location.replace('#no-question-in-category');
             }
             questionList = rs.rows;
             reNewQuestion(index);
@@ -185,7 +208,7 @@ function selectCategoryList() {
                 let option = $("<option value=\""+ i +"\" >"+categoryList.item(i).category_name+"</option>");
                 $('.select-category').append(option);
             }
-            $('#select-category-2').selectmenu().selectmenu("refresh");
+            $('#select-category-add').selectmenu().selectmenu("refresh");
         }, function() {
             console.log('failed in ategory list sql');
         });
@@ -238,7 +261,7 @@ function editCategoryList() {
 
             $('#category-setting').listview('refresh');
         }, function() {
-            console.log('failed in ategory list sql');
+            console.log('failed in dategory list sql');
         });
     },function() {
         console.log('category list transaction failed');
@@ -295,6 +318,14 @@ function reNewQuestion(index) {
 function clearInputQuestion() {
     document.getElementById('input-question').value = '';
     document.getElementById('input-answer').value = '';
+    document.getElementById('input-question').classList.remove("input-wrong");
+    document.getElementById('input-question').classList.add("input-right");
+    document.getElementById('input-answer').classList.remove("input-wrong");
+    document.getElementById('input-answer').classList.add("input-right");
+    document.getElementById('validation-question').classList.remove("show");
+    document.getElementById('validation-question').classList.add("hidden");
+    document.getElementById('validation-answer').classList.remove("show");
+    document.getElementById('validation-answer').classList.add("hidden");
 }
 
 function deleteAllDatabases() {
@@ -488,7 +519,6 @@ function listInCategory(idxStr) {
                             </li>';
                 $('#list-in-category').append(row);
             }
-
             $('#list-in-category').listview('refresh');
         }, function() {
             console.log('failed list in category sql');

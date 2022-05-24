@@ -20,8 +20,9 @@
                createQuestionTable();
                createCategoryTable();
                insertDefaultRowInCategoryTable();
+               putCntToMainPage();
 
-               $('#insert-question').click(function() {
+               $('#btn-add-question').click(function() {
                    let result = insertQuestion();
                });
                $('.to-page-study').click(function() {
@@ -143,18 +144,22 @@
                 <h1>문제 만들기</h1>
             </div>
             <div data-role="content">
-                <form onsubmit="return false">
-                    <label for="select-add-category">카테고리</label>
-                    <select id="select-category-2" class="select-category" data-native-menu="false">
-                        
-                    </select>
-                    <label for="input-question">질문</label>
-                    <input id="input-question" type="text" placeholder="질문을 입력해주세요" />
-                    <label for="input-answer">정답</label>
-                    <input id="input-answer" type="text" placeholder="정답을 입력해주세요" />
-                    <div data-role="controlgroup" data-type="horizontal">
-                        <button type="button" id="insert-question">만들기</button>
-                        <button type="reset">다시 쓰기</button>
+                <form id="form-add" onsubmit="return false">
+                    <div id="form-add-upper">
+                        <label for="select-add-category">카테고리</label>
+                        <select id="select-category-add" class="select-category" data-native-menu="false">
+                            
+                        </select>
+                        <label for="input-question">질문</label>
+                        <input id="input-question" class="input-right" type="text" placeholder="질문을 입력해주세요"/>
+                        <p id="validation-question" class="text-validation text-small">질문을 입력해주세요<img src="../imgs/icon_input_warning.png"></p>
+                        <label for="input-answer">정답</label>
+                        <input id="input-answer" class="input-right" type="text" placeholder="정답을 입력해주세요" />
+                        <p id="validation-answer" class="text-validation text-small">정답을 입력해주세요<img src="../imgs/icon_input_warning.png"></p>
+                    </div>
+                    <div id="form-add-bottom" data-type="vertical">
+                        <span><button type="button" id="btn-add-question">만들기</button></span>
+                        <span><button type="reset" id="btn-reset-question">다시 쓰기</button></span>
                     </div>
                 </form>
             </div>
@@ -171,7 +176,7 @@
             
             <div data-role="content" id="list-content">
                 <p id="question-count"></p>
-                <ul data-role="listview" id="list-ul" data-filter="true" data-filter-placeholder="">
+                <ul data-role="listview" id="list-ul" data-filter="true" data-filter-placeholder="질문 전체 검색">
                     
                 </ul>
             </div>
@@ -205,7 +210,7 @@
             <div data-role="content">
                 <label for="add-category-name">카테고리 이름</label>
                 <input type="text" id="input-category-name" placeholder="카테고리 이름을 입력하세요">
-                <a data-role="button" href="#page-set-category" id="add-new-category">추가</a>
+                <a data-role="button" href="#page-set-category" id="add-new-category" class="to-page-set-category">추가</a>
                 <a data-role="button" href="#page-select-category">취소</a>
             </div>
         </div>
@@ -280,6 +285,25 @@
             <div data-role="content">
                 <ul id="list-in-category" data-role="listview" data-filter="true" data-filter-placeholder="문제 검색" data-inset="true">
                 </ul>
+            </div>
+        </div>
+
+        <div data-role="dialog" id="no-question-in-category" data-theme="b">
+            <div data-role="header" data-position="fixed">
+                <a href="#page-select-category" class="header-btn header-home"><img class="header-btn-image to-page-set-category" src="../imgs/icon-back.png"></a>
+                <h1></h1>
+            </div>
+            <div data-role="content">
+                <br>
+                <p>질문이 없습니다!</p>
+            </div>
+        </div>
+
+        <div data-role="dialog" id="page-success-create" data-theme="b">
+            <div data-role="content">
+                <br>
+                <p>질문이 등록되었습니다!</p>
+                <a data-role="button" href="#page-add" class="to-page-add">확인</a>
             </div>
         </div>
     </body>
