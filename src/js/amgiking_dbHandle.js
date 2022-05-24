@@ -450,9 +450,9 @@ function putCntToMainPage() {
             document.getElementsByClassName('have-question')[i].style.display='inline-block';
         }
     } else {
-        prefix = '<p class="p-inline">생성한 문제 </p>';
-        suffix = '<p class="p-inline">이 있어요</p><p class="text-small">직접 만든 문제로 공부를 시작해보세요!</p>';
-        document.getElementById('has-question').innerHTML= prefix + questionCnt + '건' + suffix;
+        prefix = '<p class="p-inline text-big">생성한 문제 </p>';
+        suffix = '<p class="p-inline text-big">이 있어요</p><p class="text-small">직접 만든 문제로 공부를 시작해보세요!</p>';
+        document.getElementById('has-question').innerHTML= prefix + '<p class="p-inline text-big text-underline">' + questionCnt + '건</p>' + suffix;
         
         for (i=0; i<document.getElementsByClassName('have-question').length; i++) {
             document.getElementsByClassName('have-question')[i].style.display='none';

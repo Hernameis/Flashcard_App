@@ -3,7 +3,7 @@
 * {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 1.02em;
-    font-weight: 300!important;
+    font-weight: 400!important;
 }
 
 .ui-mobile .ui-page {
@@ -12,6 +12,7 @@
 
 .ui-content {
     height: 90%;
+    margin-top: 20px;
 }
 
 #main-img-cover {
@@ -56,11 +57,12 @@ div#main-image-box {
     background-color: #343434;
     border-radius: 5%;
     padding: 30px;
-    height: 292px;
+    height: 35%;
 }
 
 div#sub-image-box {
-    height: 270px;
+    height: 35%;
+    width: 100%;
 }
 
 .sub-btn {
@@ -81,18 +83,19 @@ div#sub-image-box {
 }
 
 .ui-page-theme-b .ui-btn.main-btn {
+    margin: 15px auto;
     background-color: #526DDE;
     border: none;
-    border-radius: 15px;
-    width: 230px;
+    border-radius: 12px;
+    width: 250px;
 }
 .ui-page-theme-b .ui-btn.sub-btn {
     background-color: #212121;
     border: none;
     box-shadow:none;
     text-align: left;
+    width: 100%;
 }
-
 
 .sub-btn-img-box {
     display:inline-block;
@@ -100,4 +103,32 @@ div#sub-image-box {
     width: 56px;
     background-color: #343434;
     border-radius: 100%;
+}
+
+.text-small {
+    font-size:0.85em;
+    font-weight: 100!important;
+    color: rgba(255,255,255,0.7);
+    margin : 5px 0px;
+}
+
+.text-blue {
+    display: inline;
+    color: #6886FF;
+    margin-top: 5px;
+    font-weight: 400!important;
+}
+
+.text-big {
+    font-size: 1.15em;
+    font-weight: 400!important;
+}
+
+.text-underline {
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
+.btn-right {
+    float: right;
 }
