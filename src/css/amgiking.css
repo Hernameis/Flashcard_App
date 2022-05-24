@@ -67,8 +67,12 @@ div#main-image-box {
     text-align: center;
     background-color: #343434;
     border-radius: 5%;
-    padding: 30px;
+    padding: 25px;
     height: 35%;
+}
+
+p#main-img-cover {
+    margin: 0;
 }
 
 div#sub-image-box {
@@ -147,4 +151,13 @@ div#sub-image-box {
 .round-box {
     margin: 10px auto!important;
     border-radius: 30px!important;
+}
+
+@media screen and (max-width: 300px) {
+    #main-img-cover img{
+        max-height: 80px;
+    }
+    .ui-page-theme-b .ui-btn.main-btn {
+        max-width: 150px;
+    }
 }
