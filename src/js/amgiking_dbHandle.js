@@ -14,8 +14,6 @@ let categoryList = {};
 
 function init() {
     printMainPage();
-    console.log(window.innerHeight +" "+ window.outerHeight);
-    console.log(window.innerWidth +" "+ window.outerWidth);
 }
 
 function initVariables() {
@@ -234,7 +232,7 @@ function editCategoryList() {
             document.getElementById('category-setting').innerHTML='';
             $('#category-setting').append('<p>카테고리</p>');
             for (i=0; i<len; i++) {
-                let category = '<li>' + categoryList[i].category_name + ' 수정 | 삭제' + '</li>';
+                let category = '<li><a href="#page-update-category" id="category' + i + '"class="round-box to-update-category"><p class="p-inline text-big">' + categoryList[i].category_name + '</p><p class="p-inline btn-right"> 수정&nbsp;&nbsp;|&nbsp;&nbsp;삭제</p></a></li>';
                 $('#category-setting').append(category);
             }
 
@@ -362,7 +360,7 @@ function deleteCategory() {
 function deleteDataInCategory() {
     db.transaction(function(ps) {
         deleteSQL = 'delete from question where category_id=?';
-        ps.executeSql(deleteSQL, [categoryList[categoryIdx].category_id],function() {
+        ps.executeSql(deleteSQL, [categoryList[categoryIdx].category_id], function() {
                 console.log('deleting category in data sql succeed');
             },function() {
                 console.log('failed deleting category in data sql');
@@ -462,4 +460,42 @@ function putCntToMainPage() {
         }
     }
     $('#main-question-cnt').trigger('create');
+}
+
+function listInCategory(idxStr) {
+    categoryIdx = idxStr.substring('category'.length);
+    a=categoryIdx;
+    console.log(categoryIdx);
+    id = categoryList[categoryIdx].category_id;
+    db.transaction(function(ps) {
+        const selctQuestionSQL = 'select * from question where category_id=?';
+        ps.executeSql(selctQuestionSQL, [id], function(ps, rs) {
+            let currQuestions = rs.rows;
+            console.log('succeed in question list sql');
+            let len = currQuestions.length;
+            document.getElementById('list-in-category').innerHTML='';
+            $('#title-category-id').text(categoryList[categoryIdx].category_name);
+            for (i=0; i<len; i++) {
+                let row =  '<li>\
+                                <div>\
+                                   <p class="p-inline text-small">질문</p>\
+                                   <p class="p-inline">' + currQuestions[i].question + '</p>\
+                                </div>\
+                                <div>\
+                                    <p class="p-inline text-small">답</p>\
+                                    <p class="p-inline">' + currQuestions[i].answer + '</p>\
+                                </div>\
+                            </li>';
+                $('#list-in-category').append(row);
+            }
+
+            $('#list-in-category').listview('refresh');
+        }, function() {
+            console.log('failed list in category sql');
+        });
+    },function() {
+        console.log('list in category transaction failed');
+    },function() {
+        console.log('list in category transaction succeed');
+    });
 }

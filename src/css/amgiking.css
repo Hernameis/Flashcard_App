@@ -1,18 +1,28 @@
+/* font */
 @import url('./fonts.css');
-
 * {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 1.02em;
-    font-weight: 400!important;
+    font-weight: 300!important;
 }
 
+/* main-page */
 .ui-mobile .ui-page {
     height: 90%;
 }
-
+    /* header */
+.ui-page-theme-b, .ui-page-theme-b .ui-bar-inherit {
+    padding-top: 1px;
+    background-color: #212121;
+    border: none;
+}
 .ui-content {
     height: 90%;
     margin-top: 20px;
+}
+
+.ui-page-theme-b .ui-btn {
+    box-shadow: none
 }
 
 #main-img-cover {
@@ -34,12 +44,13 @@
     height: 100%;
 }
 .p-inline {
-    display: inline;
+    display: inline!important;
 }
 
-.ui-page-theme-b, .ui-page-theme-b .ui-bar-inherit {
-    background-color: #212121;
-    border: none;
+.ui-header .ui-btn-left, .ui-header .ui-btn-right,
+.ui-header-fixed.ui-fixed-hidden .ui-btn-left,
+.ui-header-fixed.ui-fixed-hidden .ui-btn-right {
+    margin-top: 20px;
 }
 
 .ui-header .ui-btn-left {
@@ -120,7 +131,7 @@ div#sub-image-box {
 }
 
 .text-big {
-    font-size: 1.15em;
+    font-size: 1.15em!important;
     font-weight: 400!important;
 }
 
@@ -131,4 +142,9 @@ div#sub-image-box {
 
 .btn-right {
     float: right;
+}
+
+.round-box {
+    margin: 10px auto!important;
+    border-radius: 30px!important;
 }
