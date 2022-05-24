@@ -161,7 +161,7 @@ function getQuestionList() {
 
     db.transaction(function(ps) {
         console.log('select question list');
-        const selctQuestionSQL = 'select * from question';
+        const selctQuestionSQL = 'select * from question order by category_id';
         ps.executeSql(selctQuestionSQL, [], function(ps, rs) {
             const len = rs.rows.length;
             if (len == 0) {
@@ -172,7 +172,7 @@ function getQuestionList() {
             $('#question-count').text('총 ' + rs.rows.length + '개 등록됨');
 
             // need to fix this code
-
+            let categoryCnt = -1;
             for (i=0; i<len; i++) {
                 let j=0;
                 for(j=0; j<rs.rows.length; j++) {
@@ -180,10 +180,14 @@ function getQuestionList() {
                         break;
                     }
                 }
+                if (categoryCnt != categoryList[j]["category_id"]) {
+                    let divider = '<li data-role="listdivider" class="listdivider">' + categoryList[j]["category_name"] + '</li>';
+                    $('#list-ul').append(divider);
+                    categoryCnt = categoryList[j]["category_id"];
+                }
                 $('#list-ul').append('<li><a data-role="button">'
                                         + '<p>' + 'Q ' + rs.rows.item(i).question + '</p>'
                                         + '<p>' + 'A ' + rs.rows.item(i).answer + '</p>'
-                                        + '<div class="ui-li-count">' + categoryList[j]["category_name"] + '</div>'
                                     +'</li></a>');
             }
             $('#list-ul').listview().listview("refresh");

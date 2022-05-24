@@ -230,3 +230,16 @@ button#btn-reset-question {
 .ui-selectmenu .ui-selectmenu-list >li >a {
     color: white;
 }
+
+/* all questions */
+#list-ul >li >a{
+    margin: 15px;
+    background-color: #343434;
+    border-radius: 20px;
+}
+#list-ul >li >a::after{
+    content: none;
+}
+#list-ul .listdivider {
+    padding-bottom: 0px;
+}
