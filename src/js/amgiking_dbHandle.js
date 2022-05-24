@@ -204,7 +204,7 @@ function radioCategoryList() {
             console.log('succeed in category list sql');
             let len = categoryList.length;
             document.getElementById('radio-category').innerHTML='';
-            $('#radio-category').append('<p>카테고리</p>');
+            $('#radio-category').append('<p>카테고리 (' + len + ')</p>');
             for (i=0; i<len; i++) {
                 let radio = '<input id="category' + categoryList[i].category_id + '" type="radio" value="' + i + '" name="category">\
                 <label for="category' + categoryList[i].category_id + '">' + categoryList[i].category_name + '</label>';
@@ -230,7 +230,7 @@ function editCategoryList() {
             console.log('succeed in category list sql');
             let len = categoryList.length;
             document.getElementById('category-setting').innerHTML='';
-            $('#category-setting').append('<p>카테고리</p>');
+            $('#category-setting').append('<p>카테고리 (' + len + ')</p>');
             for (i=0; i<len; i++) {
                 let category = '<li><a href="#page-update-category" id="category' + i + '"class="round-box to-update-category"><p class="p-inline text-big">' + categoryList[i].category_name + '</p><p class="p-inline btn-right"> 수정&nbsp;&nbsp;|&nbsp;&nbsp;삭제</p></a></li>';
                 $('#category-setting').append(category);
@@ -474,7 +474,7 @@ function listInCategory(idxStr) {
             console.log('succeed in question list sql');
             let len = currQuestions.length;
             document.getElementById('list-in-category').innerHTML='';
-            $('#title-category-id').text(categoryList[categoryIdx].category_name);
+            $('#title-category-id').text(categoryList[categoryIdx].category_name + ' (' + len + ')');
             for (i=0; i<len; i++) {
                 let row =  '<li>\
                                 <div>\
