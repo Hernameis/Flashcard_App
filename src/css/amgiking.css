@@ -378,7 +378,10 @@ div#page-setting ul>li>a {
     margin: 10px;
 }
 
-.normal-btn {
-    background-color: #5b5b5b!important;
+/* dialog dialog-delete-category */
+#dialog-delete-category p{
+    text-align: center;
 }
-
+#dialog-delete-category .ui-btn{
+    margin:10px 30px;
+}
