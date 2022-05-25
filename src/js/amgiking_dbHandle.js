@@ -143,9 +143,10 @@ function getQuestion() {
             }
             if (cnt == 0) {
                 location.replace('#no-question-in-category');
+            } else {
+                questionList = rs.rows;
+                reNewQuestion(index);
             }
-            questionList = rs.rows;
-            reNewQuestion(index);
         });
     },function() {
         console.log('4_get question failed');
@@ -265,7 +266,7 @@ function editCategoryList() {
                 $('#category-setting').append(category);
             }
 
-            $('#category-setting').listview('refresh');
+            $('#category-setting').listview().listview('refresh');
         }, function() {
             console.log('failed in dategory list sql');
         });
@@ -465,9 +466,9 @@ function answerRatio() {
     let sum = right + wrong;
     
     if (sum == 0) {
-        return 0;
+        return (0).toFixed(2);
     }
-    return right / (right + wrong) * 100;
+    return (right / (right + wrong) * 100).toFixed(2);
 }
 
 function printMainPage() {
@@ -484,7 +485,7 @@ function printMainPage() {
 
 function putCntToMainPage() {
     if (questionCnt == 0) {
-        document.getElementById('has-question').innerHTML= '<p>생성한 문제가 없어요!</p>';
+        document.getElementById('has-question').innerHTML= '<p>만든 문제가 없어요!</p>';
         for (i=0; i<document.getElementsByClassName('no-question-hidden').length; i++) {
             document.getElementsByClassName('no-question-hidden')[i].style.display='none';
         }
@@ -492,9 +493,9 @@ function putCntToMainPage() {
             document.getElementsByClassName('have-question')[i].style.display='inline-block';
         }
     } else {
-        prefix = '<p class="p-inline text-big">생성한 문제 </p>';
-        suffix = '<p class="p-inline text-big">이 있어요</p><p class="text-small">직접 만든 문제로 공부를 시작해보세요!</p>';
-        document.getElementById('has-question').innerHTML= prefix + '<p class="p-inline text-big text-underline">' + questionCnt + '건</p>' + suffix;
+        prefix = '<p class="p-inline text-big">직접 만든 문제가 </p>';
+        suffix = '<p class="p-inline text-big"> 있어요</p><p class="text-small">직접 만든 문제로 공부를 시작해보세요!</p>';
+        document.getElementById('has-question').innerHTML= prefix + '<p class="p-inline text-big text-underline">' + questionCnt + '개</p>' + suffix;
         
         for (i=0; i<document.getElementsByClassName('have-question').length; i++) {
             document.getElementsByClassName('have-question')[i].style.display='none';
