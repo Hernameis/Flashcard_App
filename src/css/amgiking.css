@@ -6,6 +6,11 @@
     font-weight: 300!important;
 }
 
+/* fine-tuning */
+.ui-header-fixed.ui-fixed-hidden {
+    top: -1px;
+}
+
 /* main-page */
 .ui-mobile .ui-page {
     height: 90%;
@@ -144,6 +149,12 @@ div#sub-image-box {
     font-weight: 400!important;
 }
 
+
+.text-normal {
+    font-size: 1em!important;
+    font-weight: 300!important;
+}
+
 .text-underline {
     text-decoration: underline;
     text-underline-position: under;
@@ -231,7 +242,14 @@ button#btn-reset-question {
     color: white;
 }
 
-/* all questions */
+/* page page-list */
+
+/* page page-set-category */
+ul>li>a::after{
+    content: none!important;
+}
+
+/* page all questions */
 #list-ul >li >a{
     margin: 15px;
     background-color: #343434;
@@ -243,3 +261,14 @@ button#btn-reset-question {
 #list-ul .listdivider {
     padding-bottom: 0px;
 }
+
+/* page page-setting */
+div#page-setting ul>li>a {
+    background-color: rgba(0,0,0,0);
+    margin: 10px;
+}
+
+.normal-btn {
+    background-color: #5b5b5b!important;
+}
+

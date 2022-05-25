@@ -192,8 +192,12 @@
                 <h1>설정</h1>
             </div>
             <div data-role="content">
+                <br>
+                <p>App 설정</p>
+                <br>
                 <ul data-role="listview">
-                    <li><a href="#delete-databases-check" data-role="button">데이터 초기화</a></li>
+                    <li><a href="#delete-databases-check" data-role="button"><span><p class="p-inline text-normal">데이터 초기화</p><img class="btn-right" src="../imgs/icon-next.png"></span></a></li>
+                    <li><a href="mailto:msh4287@naver.com?subject=[암기왕] 문의 제목&body=발생 시간, 상황을 자세히 얘기해주세요. 스크린샷이 있으면 문제 해결에 도움이 됩니다" data-role="button"><span><p class="p-inline text-normal">문의 남기기</p><img class="btn-right" src="../imgs/icon-next.png"></span></a></li>
                 </ul>
             </div>
         </div>
@@ -201,8 +205,10 @@
         <div data-role="dialog" id="delete-databases-check" data-theme="b">
             <div data-role="content">
                 <p>모든 데이터를 초기화하시겠습니까?</p>
-                <a data-role="button" href="#page-setting" class="delete-databases">예</a>
-                <a data-role="button" href="#page-setting">아니오</a>
+                <p class="text-small">데이터를 초기화하면 복구할 수 없습니다.</p>
+                <br>
+                <a data-role="button" href="#page-setting" class="delete-databases normal-btn">초기화 하기</a>
+                <a data-role="button" href="#page-setting" class="normal-btn">취소</a>
             </div>
         </div>
         
@@ -306,5 +312,6 @@
                 <a data-role="button" href="#page-add" class="to-page-add">확인</a>
             </div>
         </div>
+
     </body>
     </html>
