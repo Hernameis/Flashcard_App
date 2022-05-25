@@ -233,8 +233,8 @@ function radioCategoryList() {
             document.getElementById('radio-category').innerHTML='';
             $('#radio-category').append('<p>카테고리 (' + len + ')</p>');
             for (i=0; i<len; i++) {
-                let radio = '<input id="category' + categoryList[i].category_id + '" type="radio" value="' + i + '" name="category">\
-                <label for="category' + categoryList[i].category_id + '">' + categoryList[i].category_name + '</label>';
+                let radio = '<input id="category' + categoryList[i].category_id + '" type="radio" class="radio-category" value="' + i + '" name="category">\
+                <label for="category' + categoryList[i].category_id + '" class="text-normal">' + categoryList[i].category_name + '</label>';
                 $('#radio-category').append(radio);
             }
 
@@ -408,10 +408,17 @@ function deleteDataInCategory() {
     });
 }
 
-function addAnswerToDialog() {
+function addAnswerToDialog(id) {
+    if (id == 'is-know') {
+        document.getElementsByClassName('response-don-know')[0].style.display = "none";
+        document.getElementsByClassName('response-know')[0].style.display = "block";
+    } else if (id == 'is-don-know') {
+        document.getElementsByClassName('response-don-know')[0].style.display = "block";
+        document.getElementsByClassName('response-know')[0].style.display = "none";
+    }
     $('.answer').empty().listview()
-    $('.answer').append('<li><a>' + '정답은 "' + questionList.item(indexArr[index]).answer + '"입니다' + '</li></a>');
-    $('.answer').listview('refresh');
+    $('.answer').append('<p class="text-big">' + '정답은 "' + questionList.item(indexArr[index]).answer + '"입니다' + '</p>');
+    $('.answer').trigger('create');
 }
 
 function responseWrong() {
