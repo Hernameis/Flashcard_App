@@ -58,8 +58,14 @@
     border: none;
     height: 50%;
 }
+.header-right-btn {
+    background-color: #212121!important;
+    font-size: 1em!important;
+    padding: 0;
+}
 .header-btn-image {
     background-color:#212121;
+    padding: 0px;
     height: 100%;
 }
 .p-inline {
@@ -183,7 +189,7 @@ div#sub-image-box {
     border-radius: 30px!important;
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 359px) {
     #main-img-cover img{
         max-height: 80px;
     }
