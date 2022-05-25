@@ -186,8 +186,10 @@ function getQuestionList() {
                     categoryCnt = categoryList[j]["category_id"];
                 }
                 $('#list-ul').append('<li><a data-role="button">'
+                                        + '<p class="hide-absolute">' + categoryList[j]["category_name"] + '</p>'
                                         + '<p>' + 'Q ' + rs.rows.item(i).question + '</p>'
                                         + '<p>' + 'A ' + rs.rows.item(i).answer + '</p>'
+                                        + '<button id="delete-' + rs.rows.item(i).category_id + '-' + rs.rows.item(i).question_id + '" class="ui-li-aside delete-question-btn text-small">삭제</a>'
                                     +'</li></a>');
             }
             $('#list-ul').listview().listview("refresh");
@@ -538,5 +540,23 @@ function listInCategory(idxStr) {
         console.log('list in category transaction failed');
     },function() {
         console.log('list in category transaction succeed');
+    });
+}
+
+function deleteQuestion(id) {
+    let categoryId = id.substring(id.indexOf('-')+1,id.lastIndexOf('-'))
+    let questionId = id.substring(id.lastIndexOf('-')+1);
+    db.transaction(function(ps) {
+        deleteSQL = 'delete from question where question_id=?';
+        ps.executeSql(deleteSQL, [questionId], function() {
+                console.log('deleting question sql succeed');
+            },function() {
+                console.log('failed deleting question sql');
+            }
+        );
+    },function() {
+        console.log('failed deleting question transaction');
+    },function() {
+        console.log('deleting question transaction succeed');
     });
 }

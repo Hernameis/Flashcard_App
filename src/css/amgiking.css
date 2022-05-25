@@ -15,6 +15,11 @@
     top: -1px;
 }
 
+.ui-page-theme-b .ui-btn {
+    box-shadow: none;
+    border: none!important;
+}
+
 .blue-btn {
     background-color: #526DDE!important;
     border-radius: 12px!important;
@@ -37,10 +42,6 @@
 .ui-content {
     height: 90%;
     margin-top: 20px;
-}
-
-.ui-page-theme-b .ui-btn {
-    box-shadow: none
 }
 
 #main-img-cover {
@@ -354,6 +355,21 @@ ul>li>a::after{
 }
 #list-ul .listdivider {
     padding-bottom: 0px;
+}
+.hide-absolute {
+    position: absolute;
+    top: -5000px;
+    left: -5000px;
+}
+.delete-question-btn {
+    background-color: #526DDE;
+    border-radius: 5px;
+    border: none;
+}
+.delete-question-btn a {
+    color: white;
+    font-weight: 100!important;
+    font-size: 0.9em;
 }
 
 /* page page-setting */

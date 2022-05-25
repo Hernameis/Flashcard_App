@@ -13,7 +13,7 @@
         <script src="../js/jquery.mobile-1.4.5.js"></script>
         <script src="../js/amgiking_dbHandle.js"></script>
         <script>
-           $(document).ready(function() {
+           document.addEventListener("DOMContentLoaded", function() {
                openDB();
                init();
                initVariables();
@@ -73,8 +73,12 @@
                 $('.to-page-main').click(function() {
                     printMainPage();
                });
-                $(document).on("click",".to-update-category",function() {
+                $(document).on("click",".to-update-category", function() {
                     listInCategory(this.id);
+               });
+               $(document).on("click",".delete-question-btn", function() {
+                   deleteQuestion(this.id);
+                   getQuestionList();
                });
            });
         </script>
