@@ -285,6 +285,7 @@ form#form-add {
 }
 div#form-add-upper {
     height:100%;
+    min-height: 400px;
 }
 button#btn-add-question, button#btn-reset-question {
     border-radius: 10px;
