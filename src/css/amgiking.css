@@ -281,18 +281,20 @@ div#page-select-category.ui-page-theme-b .ui-btn#start-study{
 
 /* pageadd-page */
 form#form-add {
-    height: 100%;
+    height: 80%;
 }
 div#form-add-upper {
     height:100%;
-}
-div#form-add-bottom {
-    margin-top:-40%;
 }
 button#btn-add-question, button#btn-reset-question {
     border-radius: 10px;
     width: 80%;
     margin: 15px auto;
+}
+@media screen and (max-height:414px) {
+    button#btn-add-question {
+        left: 10px;
+    }
 }
 
 button#btn-add-question {
