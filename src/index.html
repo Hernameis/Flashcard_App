@@ -7,11 +7,11 @@
         <title>암기왕</title>
 
         <link rel="shortcut icon" href="#">
-        <link rel="stylesheet" href="../css/jquery.mobile-1.4.5.css"/>
-        <link rel="stylesheet" href="../css/amgiking.css">
-        <script src="../js/jquery-1.11.1.min.js"></script>
-        <script src="../js/jquery.mobile-1.4.5.js"></script>
-        <script src="../js/amgiking_dbHandle.js"></script>
+        <link rel="stylesheet" href="./css/jquery.mobile-1.4.5.css"/>
+        <link rel="stylesheet" href="./css/amgiking.css">
+        <script src="./js/jquery-1.11.1.min.js"></script>
+        <script src="./js/jquery.mobile-1.4.5.js"></script>
+        <script src="./js/amgiking_dbHandle.js"></script>
         <script>
            document.addEventListener("DOMContentLoaded", function() {
                openDB();
@@ -86,13 +86,13 @@
     <body>
         <div data-role="page" id="page-main" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="../imgs/logo.png"></a>
+                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="./img/logo_home.png"></a>
                 <h1></h1>
-                <a href="#page-setting" class="header-btn"><img class="header-btn-image" src="../imgs/icon_settings.png"></a>
+                <a href="#page-setting" class="header-btn"><img class="header-btn-image" src="./img/icon_settings.png"></a>
             </div>
             <div data-role="content">
                 <div id="main-image-box" class="main-image-box">
-                    <p id="main-img-cover"><img src="../imgs/icon_startStudy.png"></p>
+                    <p id="main-img-cover"><img src="./img/icon_startStudy.png"></p>
                     <div id="has-question"></div>
                     <a data-role="button" href="#page-select-category" class="show-category no-question-hidden main-btn">공부 시작하기</a>
                     <a data-role="button" href="#page-add" class="to-page-add have-question main-btn">문제 만들기</a>
@@ -100,16 +100,16 @@
                 <br>
                 <div id="sub-image-box" class="no-question-hidden">
                     <p class="text-big">문제를 직접 만들어보세요!</p>
-                    <a data-role="button" href="#page-add" class="to-page-add sub-btn"><span class="sub-btn-img-box"><img src="../imgs/icon_createQuestion_icon.png"></span><p class="text-small">문제부터 정답까지 내 손으로!</p><p class="text-blue">문제 만들기</p><img class="btn-right" src="../imgs/icon-next.png"></a>
-                    <a data-role="button" href="#page-list" class="to-page-list sub-btn"><span class="sub-btn-img-box"><img src="../imgs/icon_seeAllQuestions.png"></span><p class="text-small">문제를 수정하고 싶다면?</p><p class="text-blue">전체 질문 보기</p><img class="btn-right" src="../imgs/icon-next.png"></a>
-                    <a data-role="button" href="#page-set-category" class="to-page-set-category sub-btn"><span class="sub-btn-img-box"><img src="../imgs/icon_setCategory.png"></span><p class="text-small">카테고리 수정/삭제하기</p><p class="text-blue">카테고리 설정</p><img class="btn-right" src="../imgs/icon-next.png"></a>
+                    <a data-role="button" href="#page-add" class="to-page-add sub-btn"><span class="sub-btn-img-box"><img src="./img/icon_createQuestion_icon.png"></span><p class="text-small">문제부터 정답까지 내 손으로!</p><p class="text-blue">문제 만들기</p><img class="btn-right" src="./img/icon-next.png"></a>
+                    <a data-role="button" href="#page-list" class="to-page-list sub-btn"><span class="sub-btn-img-box"><img src="./img/icon_seeAllQuestions.png"></span><p class="text-small">문제를 수정하고 싶다면?</p><p class="text-blue">전체 질문 보기</p><img class="btn-right" src="./img/icon-next.png"></a>
+                    <a data-role="button" href="#page-set-category" class="to-page-set-category sub-btn"><span class="sub-btn-img-box"><img src="./img/icon_setCategory.png"></span><p class="text-small">카테고리 수정/삭제하기</p><p class="text-blue">카테고리 설정</p><img class="btn-right" src="./img/icon-next.png"></a>
                 </div>
             </div>
         </div>
 
         <div data-role="page" id="page-select-category" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="../imgs/logo.png"></a>
+                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="./img/logo_home.png"></a>
                 <h1>카테고리 선택</h1>
             </div>
             <div data-role="content">
@@ -123,9 +123,9 @@
         
         <div data-role="page" id="page-study" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="../imgs/logo.png"></a>
+                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="./img/logo_home.png"></a>
                 <h1 id="h1-study"></h1>
-                <a href="#" id="shuffle"><img class="header-btn-image" src="../imgs/icon_shuffle.png"> 질문 섞기</a>
+                <a href="#" id="shuffle"><img class="header-btn-image" src="./img/icon_shuffle.png"> 질문 섞기</a>
             </div>
             <div data-role="content">
                 <ul data-role="listview">
@@ -148,7 +148,7 @@
         
         <div data-role="page" id="page-add" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="../imgs/logo.png"></a>
+                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="./img/logo_home.png"></a>
                 <h1>문제 만들기</h1>
             </div>
             <div data-role="content">
@@ -160,10 +160,10 @@
                         </select>
                         <label for="input-question">질문</label>
                         <input id="input-question" class="input-right" type="text" placeholder="질문을 입력해주세요"/>
-                        <p id="validation-question" class="text-validation text-small">질문을 입력해주세요<img src="../imgs/icon_input_warning.png"></p>
+                        <p id="validation-question" class="text-validation text-small">질문을 입력해주세요<img src="./img/icon_input_warning.png"></p>
                         <label for="input-answer">정답</label>
                         <input id="input-answer" class="input-right" type="text" placeholder="정답을 입력해주세요" />
-                        <p id="validation-answer" class="text-validation text-small">정답을 입력해주세요<img src="../imgs/icon_input_warning.png"></p>
+                        <p id="validation-answer" class="text-validation text-small">정답을 입력해주세요<img src="./img/icon_input_warning.png"></p>
                     </div>
                     <div id="form-add-bottom" data-type="vertical">
                         <span><button type="button" id="btn-add-question">만들기</button></span>
@@ -175,7 +175,7 @@
         
         <div data-role="page" id="page-list" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="../imgs/logo.png"></a>
+                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="./img/logo_home.png"></a>
                 <h1>문제 전체 보기</h1>
             </div>
             
@@ -189,7 +189,7 @@
         
         <div data-role="page" id="page-setting" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="../imgs/logo.png"></a>
+                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="./img/logo_home.png"></a>
                 <h1>설정</h1>
             </div>
             <div data-role="content">
@@ -197,8 +197,8 @@
                 <p>App 설정</p>
                 <br>
                 <ul data-role="listview">
-                    <li><a href="#delete-databases-check" data-role="button"><span><p class="p-inline text-normal">데이터 초기화</p><img class="btn-right" src="../imgs/icon-next.png"></span></a></li>
-                    <li><a href="mailto:msh4287@naver.com?subject=[암기왕] 문의 제목&body=발생 시간, 상황을 자세히 얘기해주세요. 스크린샷이 있으면 문제 해결에 도움이 됩니다" data-role="button"><span><p class="p-inline text-normal">문의 남기기</p><img class="btn-right" src="../imgs/icon-next.png"></span></a></li>
+                    <li><a href="#delete-databases-check" data-role="button"><span><p class="p-inline text-normal">데이터 초기화</p><img class="btn-right" src="./img/icon-next.png"></span></a></li>
+                    <li><a href="mailto:msh4287@naver.com?subject=[암기왕] 문의 제목&body=발생 시간, 상황을 자세히 얘기해주세요. 스크린샷이 있으면 문제 해결에 도움이 됩니다" data-role="button"><span><p class="p-inline text-normal">문의 남기기</p><img class="btn-right" src="./img/icon-next.png"></span></a></li>
                 </ul>
             </div>
         </div>
@@ -247,7 +247,7 @@
         
         <div data-role="page" id="page-set-category" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="../imgs/logo.png"></a>
+                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="./img/logo_home.png"></a>
                 <h1></h1>
                 <a data-role="button" href="#add-category" class="header-right-btn">추가하기</a>
             </div>
@@ -259,7 +259,7 @@
 
         <div data-role="dialog" id="create-question-done" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="../imgs/logo.png"></a>
+                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="./img/logo_home.png"></a>
                 <h1></h1>
             </div>
             <div data-role="content">
@@ -269,7 +269,7 @@
 
         <div data-role="page" id="page-response-done" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="../imgs/logo.png"></a>
+                <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="./img/logo_home.png"></a>
                 <h1></h1>
             </div>
             <div class="page-content" data-role="content">
@@ -290,7 +290,7 @@
 
         <div data-role="page" id="page-update-category" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-set-category" class="header-btn to-page-main"><img class="header-btn-image to-page-set-category" src="../imgs/icon-back.png"></a>
+                <a href="#page-set-category" class="header-btn to-page-main"><img class="header-btn-image to-page-set-category" src="./img/icon-back.png"></a>
                 <h1 id="title-category-id"></h1>
                 <a data-role="button" href="#dialog-delete-category" class="header-right-btn">삭제</a>
             </div>
@@ -302,7 +302,7 @@
 
         <div data-role="dialog" id="no-question-in-category" data-theme="b">
             <div data-role="header" data-position="fixed">
-                <a href="#page-select-category" class="header-btn show-category"><img class="header-btn-image to-page-set-category" src="../imgs/icon-back.png"></a>
+                <a href="#page-select-category" class="header-btn show-category"><img class="header-btn-image to-page-set-category" src="./img/icon-back.png"></a>
                 <h1></h1>
             </div>
             <div data-role="content">
@@ -318,6 +318,6 @@
                 <a data-role="button" href="#page-add" class="to-page-add">확인</a>
             </div>
         </div>
-
+        <script src="cordova.js"></script>
     </body>
     </html>
