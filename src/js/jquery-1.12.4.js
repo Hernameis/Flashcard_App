@@ -209,9 +209,8 @@ jQuery.extend = jQuery.fn.extend = function() {
 				src = target[ name ];
 				copy = options[ name ];
 
-				// vulnerability SNYK-JS-JQUERYMOBILE-174599 // 2022.05.27 fixed
 				// Prevent never-ending loop
-				if ( name === "__proto__" || target === copy ) {
+				if ( target === copy ) {
 					continue;
 				}
 
