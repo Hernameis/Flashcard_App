@@ -245,6 +245,11 @@ div#page-select-category.ui-page-theme-b .ui-btn#start-study{
 .question-each p#study-question{
     margin: 35px 0;
 }
+#study-question {
+    overflow: visible;
+    word-break: break-all;
+    white-space: break-spaces;
+}
 
 /* dialog dialog-response */
 #dialog-response p {
