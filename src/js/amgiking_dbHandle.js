@@ -240,7 +240,7 @@ function radioCategoryList() {
                 <label for="category' + categoryList[i].category_id + '" class="text-normal">' + categoryList[i].category_name + '</label>';
                 $('#radio-category').append(radio);
             }
-
+            $('input:radio[name="category"][value="0"]').prop('checked', true);
             $('#radio-category').trigger('create');
         }, function() {
             console.log('failed in ategory list sql');
