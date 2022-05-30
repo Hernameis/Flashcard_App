@@ -31,7 +31,7 @@
 
 /* main-page */
 .ui-mobile .ui-page {
-    height: 90%;
+    height: auto;
 }
     /* header */
 .ui-page-theme-b, .ui-page-theme-b .ui-bar-inherit {
@@ -40,7 +40,7 @@
     border: none;
 }
 .ui-content {
-    height: 797px;
+    height: auto;
     margin-top: 20px;
 }
 
@@ -387,6 +387,10 @@ ul>li>a::after{
 div#page-setting ul>li>a {
     background-color: rgba(0,0,0,0);
     margin: 10px;
+}
+#version {
+    margin-top: 100px;
+    text-align: center;
 }
 
 /* dialog dialog-delete-category */
