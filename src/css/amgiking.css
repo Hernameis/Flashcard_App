@@ -127,13 +127,14 @@ div#sub-image-box {
     transform: translate(-50%, -50%);
 }
 
-.ui-page-theme-b .ui-btn.main-btn {
+.ui-page-theme-b .ui-btn.main-btn, .ui-page-theme-b .ui-btn.main-btn:active, .ui-page-theme-b .ui-btn.main-btn:visited, .ui-page-theme-b .ui-btn.main-btn:hover {
     margin: 15px auto;
     background-color: #526DDE;
     border: none;
     border-radius: 12px;
     width: 250px;
 }
+
 .ui-page-theme-b .ui-btn.sub-btn {
     background-color: #212121;
     border: none;
