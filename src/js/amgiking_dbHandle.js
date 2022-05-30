@@ -355,6 +355,7 @@ function deleteAllDatabases() {
 function insertNewCategory() {
         db.transaction(function(ps) {
             const insertSQL = 'insert into category(category_name) select "'+ $('#input-category-name').val() +'" where not exists (select * from category where category_name="' + $('#input-category-name').val() +'")';
+            console.log('insert into category(category_name) select "'+ $('#input-category-name').val() +'" where not exists (select * from category where category_name="' + $('#input-category-name').val() +'")');
             ps.executeSql(insertSQL, [],
             function() {
                 console.log('Succeed in inserting into category table sql');
@@ -369,6 +370,10 @@ function insertNewCategory() {
             selectCategoryList();
     }
     );
+}
+
+function clearInputCategory() {
+    $('#input-category-name').val('');
 }
 
 function selectCurrentCategory() {

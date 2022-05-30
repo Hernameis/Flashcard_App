@@ -21,23 +21,29 @@
                createCategoryTable();
                insertDefaultRowInCategoryTable();
                putCntToMainPage();
-
+               
                $('#btn-add-question').click(function() {
                    let result = insertQuestion();
-               });
-               $('.to-page-study').click(function() {
-                   radioCurrentCategory();
-                   getQuestion();
-               });
-               $('.to-page-add').click(function() {
-                   clearInputQuestion();
-                   selectCategoryList()
-                   
+                });
+                $('.to-page-study').click(function() {
+                    radioCurrentCategory();
+                    getQuestion();
+                });
+                $('.to-page-add').click(function() {
+                    clearInputQuestion();
+                    selectCategoryList()
+                    
                });
                $('.to-page-list').click(function() {
                    getQuestionList();
-               })
-               $('.to-page-set-category').click(function() {
+                })
+                $('#add-new-category').click(function() {
+                    insertNewCategory();
+                });
+                $('.to-add-category').click(function() {
+                    clearInputCategory();
+                })
+                $('.to-page-set-category').click(function() {
                    editCategoryList();
                })
                $('.response-answer').click(function() {
@@ -56,9 +62,6 @@
                $('.show-category').click(function() {
                    radioCategoryList();
                    
-               });
-               $('#add-new-category').click(function() {
-                   insertNewCategory();
                });
                $('#delete-category').click(function() {
                    deleteDataInCategory();
@@ -218,7 +221,7 @@
                 <label for="add-category-name">카테고리 이름</label>
                 <input type="text" id="input-category-name" placeholder="카테고리 이름을 입력하세요">
                 <a data-role="button" href="#page-set-category" id="add-new-category" class="to-page-set-category">추가</a>
-                <a data-role="button" href="#page-select-category">취소</a>
+                <a data-role="button" href="#page-set-category">취소</a>
             </div>
         </div>
         
@@ -249,7 +252,7 @@
             <div data-role="header" data-position="fixed">
                 <a href="#page-main" class="header-btn to-page-main"><img class="header-btn-image" src="./img/logo_home.png"></a>
                 <h1></h1>
-                <a data-role="button" href="#add-category" class="header-right-btn">추가하기</a>
+                <a data-role="button" id="to-add-category" href="#add-category" class="header-right-btn">추가하기</a>
             </div>
             <div data-role="content">
                 <ul id="category-setting" data-role="listview" data-filter="true" data-filter-placeholder="카테고리 검색" data-inset="true">
