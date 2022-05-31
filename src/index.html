@@ -9,7 +9,7 @@
         <link rel="shortcut icon" href="#">
         <link rel="stylesheet" href="./css/jquery.mobile-1.4.5.css"/>
         <link rel="stylesheet" href="./css/amgiking.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
         <script src="./js/jquery.mobile-1.4.5.js"></script>
         <script src="./js/amgiking_dbHandle.js"></script>
         <script>
@@ -31,7 +31,7 @@
                 });
                 $('.to-page-add').click(function() {
                     clearInputQuestion();
-                    selectCategoryList()
+                    selectCategoryList();
                     
                });
                $('.to-page-list').click(function() {
@@ -157,9 +157,9 @@
             <div data-role="content">
                 <form id="form-add" onsubmit="return false">
                     <div id="form-add-upper">
-                        <label for="select-add-category">카테고리</label>
-                        <select id="select-category-add" class="select-category" data-native-menu="false">
-                            
+                        <label for="select-category-add">카테고리</label>
+                        <select id="select-category-add" class="select-category">
+
                         </select>
                         <label for="input-question">질문</label>
                         <input id="input-question" class="input-right" type="text" placeholder="질문을 입력해주세요"/>
@@ -325,5 +325,6 @@
             </div>
         </div>
         <script src="cordova.js"></script>
+        <script src="js/index.js"></script>
     </body>
     </html>

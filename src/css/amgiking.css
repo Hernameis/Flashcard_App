@@ -299,6 +299,10 @@ button#btn-add-question, button#btn-reset-question {
     width: 80%;
     margin: 15px auto;
 }
+#select-category-add option{
+    background-color: black;
+    color: rgba(255,255,255,0.7);
+}
 
 button#btn-add-question {
     background-color: #526DDE;
