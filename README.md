@@ -182,8 +182,8 @@ LXSDCQPKR42BEG46A25KZVH<br>
 #### 문제 만들기 & 공부하기
 
 <p>
-	<img src="./docs/img/create_question.gif" width="250px">
-    <img src="./docs/img/start_study.gif" width="250px">
+	<img src="./docs/img/create_question.gif" width="250px" height="500px">
+    <img src="./docs/img/start_study.gif" width="250px" height="500px">
 </p>
 
   
