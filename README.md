@@ -66,9 +66,10 @@
 Google Play Store 검색, 혹은 프로모션 코드 사용
 
 <p align="left">
-    <img src="./docs/img/search_app.jpg" width=300px>
-    <img src="./docs/img/use_promotion_code.gif" width=300px>
+    <img src="./docs/img/search_app.jpg" width="300px">
+    <img src="./docs/img/use_promotion_code.gif" width="300px">
 </p>
+
 
 <details>
     <summary>무료 프로모션 코드(100개, 06.31까지 유효)</summary>
@@ -113,7 +114,7 @@ DAJRYFJZPLN02867P7ER3XE<br>
 ZN58AGG6FB0414DEFHCR2TH<br>  
 1QAM1TKEBGGWE01S3TR61GM<br>  
 DX1DRLEWTU7Y8YHRC79NATP<br>  
-UQH3RWMH7ME6WPJDTA8AYZJ<br>  
+UQH3RWMH7ME6WPJDTA8AYZJ<br>  	
 0UQWFK8R02BR1TNENSLCV0R<br>  
 35QLH4DA0BU3926L7NECCWE<br>  
 9JJ306ZN8AC981GK7XDXXGW<br>  
@@ -176,13 +177,31 @@ LXSDCQPKR42BEG46A25KZVH<br>
 </details>
 
 
-### 직접 문제 만들기
+### 문제 만들기 & 공부하기
 <p>
-<img src="./docs/img/create_question.gif" align="left">
+	<img src="./docs/img/create_question.gif" align="left" width="250px">
+    <img src="./docs/img/start_study.gif" align="left" width="250px">
 </p>
+
   
 
-### 공부하기
-<p>
-<img src="./docs/img/start_study.gif" align="left">
-</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
