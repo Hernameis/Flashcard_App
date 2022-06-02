@@ -69,7 +69,7 @@ Google Play Store 검색, 혹은 프로모션 코드 사용
 
 <p>
     <img src="./docs/img/search_app.jpg" width="250px">
-    <img src="./docs/img/use_promotion_code.gif" width="250px">
+    <img src="./docs/img/use_promotion_code.gif" width="250px" height="250px">
 </p>
 
 
