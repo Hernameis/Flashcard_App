@@ -61,13 +61,15 @@
 
 ### 설치 및 실행
 
+
+
 #### 설치
 
 Google Play Store 검색, 혹은 프로모션 코드 사용
 
-<p align="left">
-    <img src="./docs/img/search_app.jpg" width="300px">
-    <img src="./docs/img/use_promotion_code.gif" width="300px">
+<p>
+    <img src="./docs/img/search_app.jpg" width="250px">
+    <img src="./docs/img/use_promotion_code.gif" width="250px">
 </p>
 
 
@@ -177,10 +179,11 @@ LXSDCQPKR42BEG46A25KZVH<br>
 </details>
 
 
-### 문제 만들기 & 공부하기
+#### 문제 만들기 & 공부하기
+
 <p>
-	<img src="./docs/img/create_question.gif" align="left" width="250px">
-    <img src="./docs/img/start_study.gif" align="left" width="250px">
+	<img src="./docs/img/create_question.gif" width="250px">
+    <img src="./docs/img/start_study.gif" width="250px">
 </p>
 
   
